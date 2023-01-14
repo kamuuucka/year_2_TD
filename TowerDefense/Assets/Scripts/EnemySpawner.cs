@@ -5,6 +5,9 @@ using UnityEngine;
 public class EnemySpawner : MonoBehaviour
 {
     public GameObject enemy;
+    public int waveNumber = 0;
+
+    private int count = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,8 +19,18 @@ public class EnemySpawner : MonoBehaviour
     {
         if (Input.GetKeyUp(KeyCode.Return))
         {
+            StartCoroutine(SpawnEnemies());
+        }
+    }
+
+    IEnumerator SpawnEnemies()
+    {
+        while (count < waveNumber)
+        {
             GameObject newEnemy = Instantiate(enemy, this.transform.position, Quaternion.identity);
             newEnemy.transform.SetParent(this.transform);
+            yield return new WaitForSeconds(2f);
+            count++;
         }
     }
 }

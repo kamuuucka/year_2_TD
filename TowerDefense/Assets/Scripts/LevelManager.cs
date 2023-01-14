@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class LevelManager : MonoBehaviour
     
     private int wave = 0;
     private int money = 0;
+    private int enemiesReachedGoal = 0;
 
     private Waypoints waypoints;
 
@@ -39,6 +41,11 @@ public class LevelManager : MonoBehaviour
         {
             money--;
         }
+
+        if (enemiesReachedGoal == 5)
+        {
+            SceneManager.LoadScene(1);
+        }
     }
 
     public int GetWave()
@@ -54,5 +61,10 @@ public class LevelManager : MonoBehaviour
     public Waypoints GetWaypoints()
     {
         return waypoints;
+    }
+
+    public void SetEnemiesReachedGoal(int enemies)
+    {
+        enemiesReachedGoal += enemies;
     }
 }

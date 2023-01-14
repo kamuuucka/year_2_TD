@@ -20,6 +20,7 @@ public class Enemy : MonoBehaviour
     {
         if (waypoint == waypoints.Length)
         {
+            LevelManager.Instance.SetEnemiesReachedGoal(1);
             Debug.Log("Enemy reached the end");
             Destroy(gameObject);
             waypoint = 0;
