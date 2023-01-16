@@ -67,4 +67,15 @@ public class LevelManager : MonoBehaviour
     {
         enemiesReachedGoal += enemies;
     }
+
+    public void SetMoney(int money)
+    {
+        this.money += money;
+    }
+
+    public float Attack(float damage)
+    {
+        Debug.Log("Attacked by: "+ damage);
+        return damage;
+    }
 }

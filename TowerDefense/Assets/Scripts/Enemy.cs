@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    private static float maxHealth = 30;
     public float speed;
+    public static float health;
+    public int money;
     
     private Transform[] waypoints;
     private int waypoint = 0;
@@ -12,6 +15,7 @@ public class Enemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        health = maxHealth;
         waypoints = LevelManager.Instance.GetWaypoints().waypoints;
     }
 
@@ -29,6 +33,17 @@ public class Enemy : MonoBehaviour
         if (Vector2.Distance(transform.position, waypoints[waypoint].position) < 0.01f)
         {
             waypoint++;
+        }
+        
+        if (Input.GetKeyUp(KeyCode.A))
+        {
+            health -= LevelManager.Instance.Attack(20);
+        }
+
+        if (health <= 0)
+        {
+            LevelManager.Instance.SetMoney(money);
+            Destroy(gameObject);
         }
     }
 }
