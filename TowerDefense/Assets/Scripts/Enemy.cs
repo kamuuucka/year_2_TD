@@ -11,12 +11,18 @@ public class Enemy : MonoBehaviour
     
     private Transform[] waypoints;
     private int waypoint = 0;
-    
+
+    public HealthBar healthBar;
+    private float attackPower;
+
     // Start is called before the first frame update
     void Start()
     {
+        attackPower = LevelManager.Instance.Attack(5);
+        
         health = maxHealth;
         waypoints = LevelManager.Instance.GetWaypoints().waypoints;
+        healthBar.SetHealth(health, maxHealth);
     }
 
     // Update is called once per frame
@@ -37,7 +43,9 @@ public class Enemy : MonoBehaviour
         
         if (Input.GetKeyUp(KeyCode.A))
         {
-            health -= LevelManager.Instance.Attack(20);
+            health -= attackPower;
+            healthBar.SetHealth(health, maxHealth);
+            Debug.Log(gameObject + "'s health: " + health);
         }
 
         if (health <= 0)

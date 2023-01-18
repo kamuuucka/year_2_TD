@@ -19,6 +19,7 @@ public class EnemySpawner : MonoBehaviour
     {
         if (Input.GetKeyUp(KeyCode.Return))
         {
+            count = 0;
             StartCoroutine(SpawnEnemies());
         }
     }
@@ -32,5 +33,7 @@ public class EnemySpawner : MonoBehaviour
             yield return new WaitForSeconds(2f);
             count++;
         }
+
+        
     }
 }
