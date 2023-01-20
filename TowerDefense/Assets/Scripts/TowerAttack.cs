@@ -8,8 +8,16 @@ public class TowerAttack : MonoBehaviour
 {
     private Collider2D range;
     private Transform rangeT;
-    [SerializeField] private Tower parentTower;
     private Enemy enemy;
+
+    public bool EnemyInRange
+    {
+        get
+        {
+            return enemyInRange;
+        }
+    }
+
     private bool enemyInRange;
     private float timer;
     private float timeBetweenAttacks = 0.5f;
@@ -23,16 +31,16 @@ public class TowerAttack : MonoBehaviour
 
     private void Update()
     {
-        if (enemyInRange)
-        {
-            timer += Time.deltaTime;
-
-            if (timer >= timeBetweenAttacks)
-            {
-                
-                enemy.AttackEnemy(parentTower.GetDamage());
-            }
-        }
+        
+            //Area attack
+            // timer += Time.deltaTime;
+            //
+            // if (timer >= timeBetweenAttacks)
+            // {
+            //     
+            //     enemy.AttackEnemy(parentTower.GetDamage());
+            // }
+        
     }
 
     private void OnTriggerEnter2D(Collider2D col)
@@ -45,5 +53,17 @@ public class TowerAttack : MonoBehaviour
     private void OnTriggerExit2D(Collider2D other)
     {
         enemyInRange = false;
+    }
+
+    public Transform EnemyT()
+    {
+        if (enemy != null)
+        {
+            return enemy.transform;
+        }
+        else
+        {
+            return null;
+        }
     }
 }

@@ -10,6 +10,7 @@ public class MoveableObject : MonoBehaviour
     Vector3Int cellPosition;
     public Grid grid;
     public GameObject hover;
+    public GameObject range;
     private int layerIgnoreRaycast;
     private int layerPlayer;
 
@@ -26,6 +27,7 @@ public class MoveableObject : MonoBehaviour
         
         //Event to hide UI/object when cursor above UI
         //unity event on start drag and on end drag
+        //TODO: make range also move with the tower!!!
         
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         

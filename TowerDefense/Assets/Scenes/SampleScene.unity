@@ -1045,6 +1045,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eec43c99b6f474cdbba905262b97c6db, type: 3}
+--- !u!114 &1201498099 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3816888859911336094, guid: ae384409fe92b46559a7274e0b7a92f8, type: 3}
+  m_PrefabInstance: {fileID: 3816888861944358989}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3602df3fb2e5e4db9bd9e045ae480f4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &1210937972 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4879746172110404381, guid: eec43c99b6f474cdbba905262b97c6db, type: 3}
@@ -2562,6 +2573,7 @@ MonoBehaviour:
   tower: {fileID: 5781062365730389370, guid: ae384409fe92b46559a7274e0b7a92f8, type: 3}
   grid: {fileID: 1659290445}
   hover: {fileID: 7260406943139016781}
+  range: {fileID: 0}
   raycastLayer:
     serializedVersion: 2
     m_Bits: 8
@@ -2639,7 +2651,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1945697591687487423, guid: ae384409fe92b46559a7274e0b7a92f8, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: ae384409fe92b46559a7274e0b7a92f8, type: 3}
 --- !u!1 &1659290444
 GameObject:
@@ -3253,10 +3266,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1945697591687487423, guid: ae384409fe92b46559a7274e0b7a92f8, type: 3}
+      propertyPath: bullet
+      value: 
+      objectReference: {fileID: 2296680071373348454, guid: 7358b41b6d72340efbd8b4206b7d3269, type: 3}
+    - target: {fileID: 1945697591687487423, guid: ae384409fe92b46559a7274e0b7a92f8, type: 3}
+      propertyPath: towerRange
+      value: 
+      objectReference: {fileID: 1201498099}
     - target: {fileID: 3816888859911336094, guid: ae384409fe92b46559a7274e0b7a92f8, type: 3}
       propertyPath: parentTower
       value: 
-      objectReference: {fileID: 7260406943748691256}
+      objectReference: {fileID: 0}
     - target: {fileID: 5781062365730389370, guid: ae384409fe92b46559a7274e0b7a92f8, type: 3}
       propertyPath: m_Name
       value: Tower
@@ -3312,22 +3333,3 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5781062366200469504, guid: ae384409fe92b46559a7274e0b7a92f8, type: 3}
   m_PrefabInstance: {fileID: 3816888861944358989}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &7260406943748691255 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5781062365730389370, guid: ae384409fe92b46559a7274e0b7a92f8, type: 3}
-  m_PrefabInstance: {fileID: 3816888861944358989}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &7260406943748691256
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7260406943748691255}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62acc676c9e6e4f078bbc32ec66b4fd9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  price: 50
-  damage: 0
