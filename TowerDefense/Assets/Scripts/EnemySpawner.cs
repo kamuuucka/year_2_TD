@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
+    public WaveDefinition[] levels;
+    
+    
     public GameObject enemy;
     public int waveNumber = 0;
 

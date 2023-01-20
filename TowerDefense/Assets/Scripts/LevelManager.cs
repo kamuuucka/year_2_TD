@@ -63,19 +63,13 @@ public class LevelManager : MonoBehaviour
         return waypoints;
     }
 
-    public void SetEnemiesReachedGoal(int enemies)
+    public void SetEnemiesReachedGoal()
     {
-        enemiesReachedGoal += enemies;
+        enemiesReachedGoal ++;
     }
 
     public void SetMoney(int money)
     {
         this.money += money;
-    }
-
-    public float Attack(float damage)
-    {
-        Debug.Log("Attacked by: "+ damage);
-        return damage;
     }
 }

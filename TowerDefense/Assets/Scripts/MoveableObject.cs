@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class MoveableObject : MonoBehaviour
 {
     public GameObject selectedObject;
-    Vector3 offset;
+    public GameObject tower;
     Vector3Int cellPosition;
     public Grid grid;
     public GameObject hover;
@@ -22,22 +23,28 @@ public class MoveableObject : MonoBehaviour
     }
     void Update()
     {
+        
+        //Event to hide UI/object when cursor above UI
+        //unity event on start drag and on end drag
+        
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         
         //Collider2D lookForTowers = Physics2D.OverlapPoint((mousePosition), raycastLayer);
         //Debug.Log("Look for tower" + lookForTowers);
 
         //return;
-        if (Input.GetMouseButtonUp(0))
+        //this event is active when you are pointing over the UI
+        if (Input.GetMouseButtonUp(0) && !EventSystem.current.IsPointerOverGameObject())
         {
+            Debug.Log(selectedObject);
             if (!selectedObject)
             {
+                Debug.Log("No selected object");
                 Collider2D targetObject = Physics2D.OverlapPoint(mousePosition);
-                Debug.Log(" Target object" + targetObject);
+                //Debug.Log(" Target object" + targetObject);
                 if (targetObject)
                 {
                     selectedObject = targetObject.transform.gameObject;
-                    offset = selectedObject.transform.position - mousePosition;
                     selectedObject.layer = layerIgnoreRaycast;
                     hover.SetActive(true);
                 }
@@ -53,9 +60,9 @@ public class MoveableObject : MonoBehaviour
         }
         if (selectedObject)
         {
-            
+            Debug.Log("Yes selected object");
             Collider2D lookForTowers = Physics2D.OverlapPoint((mousePosition), raycastLayer);
-            Debug.Log("Look for tower" + lookForTowers);
+            //Debug.Log("Look for tower" + lookForTowers);
              if (lookForTowers)
              {
                 Debug.Log("There's already a tower here ");
@@ -67,5 +74,15 @@ public class MoveableObject : MonoBehaviour
             }
             
         }  
+    }
+
+    public void SpawnTower()
+    {
+        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        GameObject newTower = Instantiate(tower, mousePosition, Quaternion.identity);
+        selectedObject = newTower;
+        selectedObject.layer = layerIgnoreRaycast;
+        hover.SetActive(true);
+        Debug.Log("New selected object: " + selectedObject);
     }
 }

@@ -18,7 +18,6 @@ public class Enemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        attackPower = LevelManager.Instance.Attack(5);
         
         health = maxHealth;
         waypoints = LevelManager.Instance.GetWaypoints().waypoints;
@@ -30,7 +29,7 @@ public class Enemy : MonoBehaviour
     {
         if (waypoint == waypoints.Length)
         {
-            LevelManager.Instance.SetEnemiesReachedGoal(1);
+            LevelManager.Instance.SetEnemiesReachedGoal();
             Debug.Log("Enemy reached the end");
             Destroy(gameObject);
             waypoint = 0;
@@ -41,17 +40,19 @@ public class Enemy : MonoBehaviour
             waypoint++;
         }
         
-        if (Input.GetKeyUp(KeyCode.A))
-        {
-            health -= attackPower;
-            healthBar.SetHealth(health, maxHealth);
-            Debug.Log(gameObject + "'s health: " + health);
-        }
+        
 
         if (health <= 0)
         {
             LevelManager.Instance.SetMoney(money);
             Destroy(gameObject);
         }
+    }
+
+    public void AttackEnemy(float damage)
+    {
+        health -= damage;
+        healthBar.SetHealth(health, maxHealth);
+        Debug.Log(gameObject + "'s health: " + health);
     }
 }
