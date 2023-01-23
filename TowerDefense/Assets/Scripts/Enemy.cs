@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    private static float maxHealth = 30;
-    public float speed;
-    public static float health;
-    public int money;
+    [SerializeField]
+    protected float maxHealth = 0;
+    [SerializeField]
+    protected float speed = 0;
+    private float health = 0;
+    [SerializeField]
+    protected int money = 0;
     
     private Transform[] waypoints;
     private int waypoint = 0;
@@ -15,6 +18,7 @@ public class Enemy : MonoBehaviour
     public HealthBar healthBar;
     private float attackPower;
 
+    //TODO: HEALTHBAR
     // Start is called before the first frame update
     void Start()
     {
@@ -40,8 +44,6 @@ public class Enemy : MonoBehaviour
             waypoint++;
         }
         
-        
-
         if (health <= 0)
         {
             LevelManager.Instance.SetMoney(money);

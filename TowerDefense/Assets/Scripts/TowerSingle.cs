@@ -11,7 +11,7 @@ public class TowerSingle : Tower
     private float timer;
     private void Start()
     {
-        price = 50;
+        //price = 50;
         damage = DamageType.single;
         towerRange = GetComponentInChildren<TowerAttack>();
     }
@@ -20,8 +20,9 @@ public class TowerSingle : Tower
     {
         timer += Time.deltaTime;
 
-        if (timer > 2 && towerRange.EnemyInRange)
+        if (timer > 0.1f && towerRange.EnemyInRange)
         {
+            Debug.Log("REady to shoot");
             timer = 0;
             ShootBullet();
             enemyT = towerRange.EnemyT();

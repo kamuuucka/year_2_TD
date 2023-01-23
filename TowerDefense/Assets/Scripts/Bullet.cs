@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -32,5 +33,15 @@ public class Bullet : MonoBehaviour
             transform.rotation = Quaternion.Euler(0,0,rotation);
         }
         
+    }
+
+    private void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.CompareTag("Enemy"))
+        {
+            Debug.Log("enemy hit");
+            col.GetComponentInParent<Enemy>().AttackEnemy(parentTower.GetDamage());
+            Destroy(gameObject);
+        }
     }
 }

@@ -86,7 +86,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5248191808715557036}
   - component: {fileID: 4943122084801360763}
-  - component: {fileID: 5429956394172984125}
+  - component: {fileID: 1448776202256488183}
   - component: {fileID: 2561866270425520318}
   - component: {fileID: 9173138914347062800}
   m_Layer: 0
@@ -164,7 +164,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &5429956394172984125
+--- !u!114 &1448776202256488183
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -176,7 +176,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e37aefbe67a8742ac924b1acdcc821f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
+  maxHealth: 30
+  speed: 2.5
   money: 20
   healthBar: {fileID: 6185077957980075518}
 --- !u!61 &2561866270425520318
