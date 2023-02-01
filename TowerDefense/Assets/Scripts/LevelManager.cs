@@ -10,7 +10,9 @@ public class LevelManager : MonoBehaviour
     
     private int wave = 0;
     private int money = 0;
-    private int enemiesReachedGoal = 0;
+    private int lives = 5;
+
+    private float timer = 90.0f;
 
     private Waypoints waypoints;
 
@@ -28,6 +30,8 @@ public class LevelManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        timer -= Time.deltaTime;
+
         if (Input.GetKeyUp(KeyCode.L))
         {
             wave++;
@@ -42,7 +46,9 @@ public class LevelManager : MonoBehaviour
             money--;
         }
 
-        if (enemiesReachedGoal == 5)
+      
+
+        if (lives <= 0)
         {
             SceneManager.LoadScene(1);
         }
@@ -63,13 +69,28 @@ public class LevelManager : MonoBehaviour
         return waypoints;
     }
 
-    public void SetEnemiesReachedGoal()
-    {
-        enemiesReachedGoal ++;
-    }
-
     public void SetMoney(int money)
     {
         this.money += money;
+    }
+
+    public int GetLives()
+    {
+        return lives;
+    }
+
+    public void SetLives(int lives)
+    {
+        this.lives -= lives;
+    }
+
+    public float GetTime()
+    {
+        return timer;
+    }
+
+    public void ResetTime()
+    {
+        timer = 90.0f;
     }
 }

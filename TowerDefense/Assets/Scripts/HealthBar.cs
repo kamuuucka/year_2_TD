@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,16 +11,12 @@ public class HealthBar : MonoBehaviour
     public Color lowHealth;
     public Color highHealth;
     public Vector3 offset;
-    private Image _image;
-
-    private void Start()
-    {
-       // _image = slider.fillRect.GetComponentInChildren<Image>();
-    }
+    public TMP_Text moneyNumber;
 
     private void Update()
     {
         slider.transform.position = Camera.main.WorldToScreenPoint(transform.parent.position + offset ); 
+        moneyNumber.transform.position = Camera.main.WorldToScreenPoint(transform.parent.position);
     }
 
     public void SetHealth(float health, float maxHealth)

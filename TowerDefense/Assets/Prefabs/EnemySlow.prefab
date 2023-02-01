@@ -7,6 +7,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 293574282760183518, guid: 58284e5bf76794388b790b5cc240efbb, type: 3}
+      propertyPath: m_text
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 1448776202256488183, guid: 58284e5bf76794388b790b5cc240efbb, type: 3}
       propertyPath: money
       value: 25

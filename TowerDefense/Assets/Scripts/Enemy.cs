@@ -36,9 +36,9 @@ public class Enemy : MonoBehaviour
     {
         if (waypoint == waypoints.Length)
         {
-            LevelManager.Instance.SetEnemiesReachedGoal();
             Debug.Log("Enemy reached the end");
             Destroy(gameObject);
+            LevelManager.Instance.SetLives(1);
             waypoint = 0;
         }
         transform.position = Vector2.MoveTowards(transform.position, waypoints[waypoint].position, speed * Time.deltaTime);
