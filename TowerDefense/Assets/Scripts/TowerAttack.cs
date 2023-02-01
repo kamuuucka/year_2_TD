@@ -32,15 +32,6 @@ public class TowerAttack : MonoBehaviour
     private void Update()
     {
         
-            //Area attack
-            // timer += Time.deltaTime;
-            //
-            // if (timer >= timeBetweenAttacks)
-            // {
-            //     
-            //     enemy.AttackEnemy(parentTower.GetDamage());
-            // }
-        
     }
 
     private void OnTriggerEnter2D(Collider2D col)

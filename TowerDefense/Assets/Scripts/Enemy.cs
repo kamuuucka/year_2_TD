@@ -17,12 +17,15 @@ public class Enemy : MonoBehaviour
 
     public HealthBar healthBar;
     private float attackPower;
+    private float oldSpeed;
+
+    public bool slowedDown;
 
     //TODO: HEALTHBAR
     // Start is called before the first frame update
     void Start()
     {
-        
+        oldSpeed = speed;
         health = maxHealth;
         waypoints = LevelManager.Instance.GetWaypoints().waypoints;
         healthBar.SetHealth(health, maxHealth);
@@ -49,6 +52,11 @@ public class Enemy : MonoBehaviour
             LevelManager.Instance.SetMoney(money);
             Destroy(gameObject);
         }
+
+        if (slowedDown)
+        {
+            ResetSpeed();
+        }
     }
 
     public void AttackEnemy(float damage)
@@ -56,5 +64,18 @@ public class Enemy : MonoBehaviour
         health -= damage;
         healthBar.SetHealth(health, maxHealth);
         Debug.Log(gameObject + "'s health: " + health);
+    }
+
+    public void SetSpeed(float newSpeed)
+    {
+        speed = newSpeed;
+        slowedDown = true;
+        Debug.Log("slowwww");
+    }
+
+    public void ResetSpeed()
+    {
+        speed = oldSpeed;
+        slowedDown = false;
     }
 }

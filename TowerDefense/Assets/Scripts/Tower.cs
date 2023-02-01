@@ -15,7 +15,7 @@ public class Tower : MonoBehaviour
     }
 
     [SerializeField] protected DamageType damage;
-    private int damageValue = 0;
+    protected int damageValue = 0;
 
     public int GetPrice()
     {

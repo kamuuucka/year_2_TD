@@ -20,12 +20,12 @@ public class TowerSingle : Tower
     {
         timer += Time.deltaTime;
 
-        if (timer > 0.1f && towerRange.EnemyInRange)
+        if (timer > 1f && towerRange.EnemyInRange)
         {
             Debug.Log("REady to shoot");
             timer = 0;
-            ShootBullet();
             enemyT = towerRange.EnemyT();
+            enemyT.GetComponentInParent<Enemy>().AttackEnemy(10);
         }
     }
 
