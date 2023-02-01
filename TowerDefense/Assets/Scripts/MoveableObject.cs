@@ -6,7 +6,9 @@ using UnityEngine.EventSystems;
 public class MoveableObject : MonoBehaviour
 {
     public GameObject selectedObject;
-    public GameObject tower;
+    public GameObject towerSingle;
+    public GameObject towerArea;
+    public GameObject towerDebuff;
     Vector3Int cellPosition;
     public Grid grid;
     public GameObject hover;
@@ -27,7 +29,6 @@ public class MoveableObject : MonoBehaviour
         
         //Event to hide UI/object when cursor above UI
         //unity event on start drag and on end drag
-        //TODO: make range also move with the tower!!!
         
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         
@@ -78,13 +79,34 @@ public class MoveableObject : MonoBehaviour
         }  
     }
 
-    public void SpawnTower()
+    //Used in buttons
+    public void SpawnTowerSingle()
     {
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        GameObject newTower = Instantiate(tower, mousePosition, Quaternion.identity);
+        GameObject newTower = Instantiate(towerSingle, mousePosition, Quaternion.identity);
         selectedObject = newTower;
         selectedObject.layer = layerIgnoreRaycast;
         hover.SetActive(true);
-        Debug.Log("New selected object: " + selectedObject);
+        LevelManager.Instance.SetMoney(-50);
+    }
+
+    public void SpawnTowerArea()
+    {
+        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        GameObject newTower = Instantiate(towerArea, mousePosition, Quaternion.identity);
+        selectedObject = newTower;
+        selectedObject.layer = layerIgnoreRaycast;
+        hover.SetActive(true);
+        LevelManager.Instance.SetMoney(-50);
+    }
+
+    public void SpawnTowerDebuff()
+    {
+        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        GameObject newTower = Instantiate(towerDebuff, mousePosition, Quaternion.identity);
+        selectedObject = newTower;
+        selectedObject.layer = layerIgnoreRaycast;
+        hover.SetActive(true);
+        LevelManager.Instance.SetMoney(-100);
     }
 }
