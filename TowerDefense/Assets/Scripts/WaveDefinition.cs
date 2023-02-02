@@ -4,7 +4,9 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Wave")]
 public class WaveDefinition : ScriptableObject
 {
-    public Enemy enemyPrefab;
-    public int count;
-    public float delay;
+    public GameObject enemySlow;
+    public GameObject enemyFast;
+    public float waitTime;
+    public int numberOfSlowEnemies;
+    public int numberOfFastEnemies;
 }

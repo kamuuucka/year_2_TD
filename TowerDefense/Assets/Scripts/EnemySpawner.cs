@@ -5,12 +5,10 @@ using UnityEngine;
 public class EnemySpawner : MonoBehaviour
 {
     public WaveDefinition[] levels;
-    
-    
-    public GameObject enemy;
     public int waveNumber = 0;
+    private bool lastEnemy = false;
 
-    private int count = 0;
+    private int enemySpawned = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,23 +18,40 @@ public class EnemySpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyUp(KeyCode.Return))
-        {
-            count = 0;
-            StartCoroutine(SpawnEnemies());
+        if (Input.GetKeyUp(KeyCode.Return)){
+            Debug.Log("WAVE: " + waveNumber);
+            lastEnemy = false;
+            StartCoroutine(SpawnEnemies(levels[waveNumber].enemyFast, levels[waveNumber].waitTime, levels[waveNumber].numberOfFastEnemies, false));
+            StartCoroutine(SpawnEnemies(levels[waveNumber].enemySlow, levels[waveNumber].waitTime, levels[waveNumber].numberOfSlowEnemies, true));
         }
     }
 
-    IEnumerator SpawnEnemies()
+    IEnumerator SpawnEnemies(GameObject enemy, float waitTime, int count, bool hasLastEnemy)
     {
-        while (count < waveNumber)
+        //Debug.Log("Start spawning enemies");
+        enemySpawned = 0;
+        while (enemySpawned < count)
         {
             GameObject newEnemy = Instantiate(enemy, this.transform.position, Quaternion.identity);
             newEnemy.transform.SetParent(this.transform);
-            yield return new WaitForSeconds(2f);
-            count++;
+            newEnemy.name += enemySpawned;
+            if (enemySpawned + 1 == count)
+            {
+                newEnemy.GetComponent<Enemy>().SetLast();
+            }
+            yield return new WaitForSeconds(waitTime);
+            enemySpawned++;
         }
 
-        
+        // if (hasLastEnemy)
+        // {
+        //     waveNumber++;
+        //     lastEnemy = true;
+        // }
+    }
+
+    public bool GetLastEnemy()
+    {
+        return lastEnemy;
     }
 }

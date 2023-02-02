@@ -240,8 +240,8 @@ Transform:
   m_GameObject: {fileID: 2501227307222827385}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.43266, y: -0.7744242, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 57916894133822856}
   m_Father: {fileID: 0}
@@ -313,6 +313,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 30
   speed: 2.5
+  health: 0
   money: 20
   healthBar: {fileID: 6185077957980075518}
   slowedDown: 0

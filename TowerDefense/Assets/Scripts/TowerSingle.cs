@@ -9,24 +9,32 @@ public class TowerSingle : Tower
     [SerializeField] private TowerAttack towerRange;
     private Transform enemyT;
     private float timer;
+    private List<Enemy> _enemies;// = new List<Enemy>();
     private void Start()
     {
-        //price = 50;
-        damage = DamageType.single;
         towerRange = GetComponentInChildren<TowerAttack>();
     }
 
     private void Update()
     {
-        timer += Time.deltaTime;
-
-        if (timer > 1f && towerRange.EnemyInRange)
+        _enemies = towerRange.GetTransforms();
+        if (timer > 0.5f && towerRange.EnemyInRange)
         {
-            Debug.Log("REady to shoot");
+            Debug.Log(_enemies[0].name);
             timer = 0;
-            enemyT = towerRange.EnemyT();
-            enemyT.GetComponentInParent<Enemy>().AttackEnemy(10);
+            if (_enemies[0].GetDead())
+            {
+                Debug.Log(_enemies[0].name + " died");
+                //_enemies.Remove(_enemies[0]);
+            }
+            _enemies[0].AttackEnemy(GetDamage());
+            Debug.Log("shooting at: " + _enemies[0].name);
+            
+            //enemyT = towerRange.EnemyT();
+            //enemyT.GetComponentInParent<Enemy>().AttackEnemy(10);
         }
+        
+        timer += Time.deltaTime;
     }
 
     private void ShootBullet()

@@ -30,7 +30,7 @@ public class Tower : MonoBehaviour
                 damageValue = 10;
                 break;
             case DamageType.area:
-                damageValue = 5;
+                damageValue = 15;
                 break;
             case DamageType.special:
                 damageValue = 0;

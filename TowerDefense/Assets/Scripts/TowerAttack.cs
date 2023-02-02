@@ -10,6 +10,8 @@ public class TowerAttack : MonoBehaviour
     private Transform rangeT;
     private Enemy enemy;
 
+    private List<Enemy> _enemies = new List<Enemy>();
+
     public bool EnemyInRange
     {
         get
@@ -26,24 +28,29 @@ public class TowerAttack : MonoBehaviour
     void Start()
     {
         range = gameObject.GetComponentInChildren<Collider2D>();
-        Debug.Log(range.gameObject.name);
+        //Debug.Log(range.gameObject.name);
     }
 
     private void Update()
     {
-        
     }
 
     private void OnTriggerEnter2D(Collider2D col)
     {
         timer = 0f;
         enemy = col.gameObject.GetComponent<Enemy>();
+        Debug.Log(col.gameObject);
+        _enemies.Add(col.gameObject.GetComponent<Enemy>());
+        Debug.Log("After adding: " + _enemies.Count);
         enemyInRange = true;
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
         enemyInRange = false;
+        _enemies.Remove(other.gameObject.GetComponent<Enemy>());
+        other.gameObject.GetComponent<Enemy>().ResetSpeed();
+        Debug.Log("After removing: " + _enemies.Count);
     }
 
     public Transform EnemyT()
@@ -56,5 +63,10 @@ public class TowerAttack : MonoBehaviour
         {
             return null;
         }
+    }
+
+    public List<Enemy> GetTransforms()
+    {
+        return _enemies;
     }
 }

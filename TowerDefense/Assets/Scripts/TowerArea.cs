@@ -5,23 +5,27 @@ using UnityEngine;
 public class TowerArea : Tower
 {
     [SerializeField] private TowerAttack towerRange;
-    private Transform enemyT;
     private float timer;
+    private List<Enemy> enemiesT;
     private void Start()
     {
-        damage = DamageType.single;
+        //damage = DamageType.area;
         towerRange = GetComponentInChildren<TowerAttack>();
     }
 
     private void Update()
     {
-        timer += Time.deltaTime;
+        enemiesT = towerRange.GetTransforms();
 
         if (timer > 2f && towerRange.EnemyInRange)
         {
-            Debug.Log("REady to shoot");
             timer = 0;
-            towerRange.EnemyT().GetComponentInParent<Enemy>().AttackEnemy(GetDamage());
+            foreach (var enemy in enemiesT)
+            {
+                enemy.AttackEnemy(GetDamage());
+            }
         }
+        
+        timer += Time.deltaTime;
     }
 }

@@ -5,24 +5,16 @@ using UnityEngine;
 public class TowerDebuff : Tower
 {
     [SerializeField] private TowerAttack towerRange;
-    private float timer;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
+    private List<Enemy> enemiesT;
+    
     void Update()
     {
-        timer += Time.deltaTime;
-        if (towerRange.EnemyInRange)
+        enemiesT = towerRange.GetTransforms();
+        
+        foreach (var enemy in enemiesT)
         {
-            if (!towerRange.EnemyT().GetComponentInParent<Enemy>().slowedDown)
-            {
-                towerRange.EnemyT().GetComponentInParent<Enemy>().SetSpeed(1.5f);
-            }
-            
+            Debug.Log("slowing down: " + enemy);
+            enemy.SetSpeed(enemy.GetSpeed() - 1.0f);
         }
     }
 }
