@@ -15,5 +15,5 @@ MonoBehaviour:
   enemySlow: {fileID: 1482365224431986542, guid: d3383a3b6df654cb7811c9a7fed496d2, type: 3}
   enemyFast: {fileID: 7584633541940117491, guid: ef3b6d855bcdb4e0db0295337dbd75b3, type: 3}
   waitTime: 2
-  numberOfSlowEnemies: 4
-  numberOfFastEnemies: 4
+  numberOfSlowEnemies: 3
+  numberOfFastEnemies: 2

@@ -10,9 +10,10 @@ public class TowerAttack : MonoBehaviour
     private Transform rangeT;
     private Enemy enemy;
 
+    [SerializeField]
     private List<Enemy> _enemies = new List<Enemy>();
 
-    public bool EnemyInRange
+    public int EnemyInRange
     {
         get
         {
@@ -20,7 +21,7 @@ public class TowerAttack : MonoBehaviour
         }
     }
 
-    private bool enemyInRange;
+    private int enemyInRange = 0;
     private float timer;
     private float timeBetweenAttacks = 0.5f;
 
@@ -39,18 +40,18 @@ public class TowerAttack : MonoBehaviour
     {
         timer = 0f;
         enemy = col.gameObject.GetComponent<Enemy>();
-        Debug.Log(col.gameObject);
+        //Debug.Log(col.gameObject);
         _enemies.Add(col.gameObject.GetComponent<Enemy>());
-        Debug.Log("After adding: " + _enemies.Count);
-        enemyInRange = true;
+        //Debug.Log("After adding: " + _enemies.Count);
+        enemyInRange++;
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        enemyInRange = false;
+        enemyInRange--;
         _enemies.Remove(other.gameObject.GetComponent<Enemy>());
         other.gameObject.GetComponent<Enemy>().ResetSpeed();
-        Debug.Log("After removing: " + _enemies.Count);
+        //Debug.Log("After removing: " + _enemies.Count);
     }
 
     public Transform EnemyT()
@@ -68,5 +69,13 @@ public class TowerAttack : MonoBehaviour
     public List<Enemy> GetTransforms()
     {
         return _enemies;
+    }
+
+    public void RemoveFromTheList()
+    {
+        if (_enemies != null)
+        {
+            _enemies.RemoveAt(0);
+        }
     }
 }

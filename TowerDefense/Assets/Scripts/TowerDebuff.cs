@@ -13,7 +13,7 @@ public class TowerDebuff : Tower
         
         foreach (var enemy in enemiesT)
         {
-            Debug.Log("slowing down: " + enemy);
+            //Debug.Log("slowing down: " + enemy);
             enemy.SetSpeed(enemy.GetSpeed() - 1.0f);
         }
     }

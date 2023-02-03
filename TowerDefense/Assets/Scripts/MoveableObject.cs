@@ -22,7 +22,7 @@ public class MoveableObject : MonoBehaviour
     {
         layerIgnoreRaycast = LayerMask.NameToLayer("Ignore Raycast");
         layerPlayer = LayerMask.NameToLayer("Player");
-        Debug.Log(layerPlayer + " / " + raycastLayer.value);
+        //Debug.Log(layerPlayer + " / " + raycastLayer.value);
     }
     void Update()
     {
@@ -39,10 +39,10 @@ public class MoveableObject : MonoBehaviour
         //this event is active when you are pointing over the UI
         if (Input.GetMouseButtonUp(0) && !EventSystem.current.IsPointerOverGameObject())
         {
-            Debug.Log(selectedObject);
+            //Debug.Log(selectedObject);
             if (!selectedObject)
             {
-                Debug.Log("No selected object");
+                //Debug.Log("No selected object");
                 Collider2D targetObject = Physics2D.OverlapPoint(mousePosition);
                 //Debug.Log(" Target object" + targetObject);
                 if (targetObject)
@@ -63,12 +63,12 @@ public class MoveableObject : MonoBehaviour
         }
         if (selectedObject)
         {
-            Debug.Log("Yes selected object");
+           // Debug.Log("Yes selected object");
             Collider2D lookForTowers = Physics2D.OverlapPoint((mousePosition), raycastLayer);
             //Debug.Log("Look for tower" + lookForTowers);
              if (lookForTowers)
              {
-                Debug.Log("There's already a tower here ");
+                //Debug.Log("There's already a tower here ");
              }
              else
              {

@@ -45,7 +45,7 @@ public class Enemy : MonoBehaviour
             waypoint = 0;
             if (last)
             {
-                Debug.Log("End of the wave");
+                //Debug.Log("End of the wave");
             }
         }
         transform.position = Vector2.MoveTowards(transform.position, waypoints[waypoint].position, speed * Time.deltaTime);
@@ -58,7 +58,7 @@ public class Enemy : MonoBehaviour
         {
             if (last)
             {
-                Debug.Log("End of the wave");
+                //Debug.Log("End of the wave");
             }
             dead = true;
             LevelManager.Instance.SetMoney(money);
@@ -75,7 +75,7 @@ public class Enemy : MonoBehaviour
     {
         health -= damage;
         healthBar.SetHealth(health, maxHealth);
-        Debug.Log(gameObject + "'s health: " + health);
+       // Debug.Log(gameObject + "'s health: " + health);
     }
 
     public float GetSpeed()
@@ -86,7 +86,7 @@ public class Enemy : MonoBehaviour
     public void SetSpeed(float newSpeed)
     {
         speed = newSpeed;
-        Debug.Log(speed);
+        //Debug.Log(speed);
         slowedDown = true;
     }
 
@@ -104,5 +104,10 @@ public class Enemy : MonoBehaviour
     public bool GetDead()
     {
         return dead;
+    }
+
+    public float GetHealth()
+    {
+        return health;
     }
 }

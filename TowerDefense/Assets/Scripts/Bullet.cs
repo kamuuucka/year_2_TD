@@ -39,7 +39,7 @@ public class Bullet : MonoBehaviour
     {
         if (col.CompareTag("Enemy"))
         {
-            Debug.Log("enemy hit");
+           // Debug.Log("enemy hit");
             col.GetComponentInParent<Enemy>().AttackEnemy(parentTower.GetDamage());
             Destroy(gameObject);
         }

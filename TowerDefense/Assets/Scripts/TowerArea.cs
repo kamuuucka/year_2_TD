@@ -17,7 +17,7 @@ public class TowerArea : Tower
     {
         enemiesT = towerRange.GetTransforms();
 
-        if (timer > 2f && towerRange.EnemyInRange)
+        if (timer > 2f && towerRange.EnemyInRange > 0)
         {
             timer = 0;
             foreach (var enemy in enemiesT)

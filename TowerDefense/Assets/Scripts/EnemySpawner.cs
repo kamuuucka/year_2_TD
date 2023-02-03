@@ -19,7 +19,7 @@ public class EnemySpawner : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyUp(KeyCode.Return)){
-            Debug.Log("WAVE: " + waveNumber);
+            //Debug.Log("WAVE: " + waveNumber);
             lastEnemy = false;
             StartCoroutine(SpawnEnemies(levels[waveNumber].enemyFast, levels[waveNumber].waitTime, levels[waveNumber].numberOfFastEnemies, false));
             StartCoroutine(SpawnEnemies(levels[waveNumber].enemySlow, levels[waveNumber].waitTime, levels[waveNumber].numberOfSlowEnemies, true));
