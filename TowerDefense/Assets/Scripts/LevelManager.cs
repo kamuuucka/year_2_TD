@@ -15,6 +15,7 @@ public class LevelManager : MonoBehaviour
     private float timer = 90.0f;
 
     private Waypoints waypoints;
+    private bool upgrade = false;
 
     private void Awake()
     {
@@ -45,8 +46,11 @@ public class LevelManager : MonoBehaviour
         {
             money--;
         }
-
-      
+        
+        if (Input.GetKeyUp(KeyCode.A))
+        {
+            upgrade = true;
+        }
 
         if (lives <= 0)
         {
@@ -92,5 +96,11 @@ public class LevelManager : MonoBehaviour
     public void ResetTime()
     {
         timer = 90.0f;
+    }
+
+    public bool Upgrade()
+    {
+        Debug.Log(upgrade);
+        return upgrade;
     }
 }

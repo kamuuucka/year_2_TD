@@ -22,29 +22,20 @@ public class MoveableObject : MonoBehaviour
     {
         layerIgnoreRaycast = LayerMask.NameToLayer("Ignore Raycast");
         layerPlayer = LayerMask.NameToLayer("Player");
-        //Debug.Log(layerPlayer + " / " + raycastLayer.value);
     }
     void Update()
     {
         
-        //Event to hide UI/object when cursor above UI
-        //unity event on start drag and on end drag
-        
+        // TODO: Event to hide UI/object when cursor above UI
+
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         
-        //Collider2D lookForTowers = Physics2D.OverlapPoint((mousePosition), raycastLayer);
-        //Debug.Log("Look for tower" + lookForTowers);
-
-        //return;
         //this event is active when you are pointing over the UI
         if (Input.GetMouseButtonUp(0) && !EventSystem.current.IsPointerOverGameObject())
         {
-            //Debug.Log(selectedObject);
             if (!selectedObject)
             {
-                //Debug.Log("No selected object");
                 Collider2D targetObject = Physics2D.OverlapPoint(mousePosition);
-                //Debug.Log(" Target object" + targetObject);
                 if (targetObject)
                 {
                     selectedObject = targetObject.transform.gameObject;
@@ -59,6 +50,13 @@ public class MoveableObject : MonoBehaviour
                 hover.SetActive(false);
                 selectedObject.layer = layerPlayer;
                 selectedObject = null;
+            }
+        }
+        else if (Input.GetMouseButtonUp(1))
+        {
+            if (!selectedObject && LevelManager.Instance.Upgrade())
+            {
+                Debug.Log("Upgrading");
             }
         }
         if (selectedObject)

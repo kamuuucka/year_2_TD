@@ -6,6 +6,10 @@ using UnityEngine;
 public class Tower : MonoBehaviour
 {
     [SerializeField] protected int price;
+    [SerializeField] protected int upgradePrice;
+    [SerializeField] private GameObject upgrade;
+    protected bool upgradeAvailable = false;
+    protected bool upgraded = false;
 
     protected enum DamageType
     {
@@ -20,6 +24,11 @@ public class Tower : MonoBehaviour
     public int GetPrice()
     {
         return price;
+    }
+
+    private void Update()
+    {
+       
     }
 
     public int GetDamage()
@@ -40,5 +49,22 @@ public class Tower : MonoBehaviour
         }
 
         return damageValue;
+    }
+
+    protected void UpgradeTower()
+    {
+        upgradeAvailable = LevelManager.Instance.Upgrade();
+        
+        if (upgradeAvailable)
+        {
+            Debug.Log("You can afford an upgrade!");
+            upgrade.SetActive(true);
+        }
+        
+        if (upgraded)
+        {
+            upgraded = false;
+            upgradePrice += 50;
+        }
     }
 }

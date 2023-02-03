@@ -17,8 +17,9 @@ public class TowerSingle : Tower
         towerRange = GetComponentInChildren<TowerAttack>();
     }
 
-    private void Update()
+    protected virtual void Update()
     {
+        UpgradeTower();
         _enemies = towerRange.GetTransforms();
         Debug.Log(towerRange.EnemyInRange);
         if (timer > 0.5f && towerRange.EnemyInRange > 0)
