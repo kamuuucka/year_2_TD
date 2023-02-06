@@ -39,6 +39,7 @@ public class MoveableObject : MonoBehaviour
                 if (targetObject)
                 {
                     selectedObject = targetObject.transform.gameObject;
+                    hover = selectedObject.transform.GetChild(0).gameObject;
                     selectedObject.layer = layerIgnoreRaycast;
                     hover.SetActive(true);
                 }
@@ -50,6 +51,7 @@ public class MoveableObject : MonoBehaviour
                 hover.SetActive(false);
                 selectedObject.layer = layerPlayer;
                 selectedObject = null;
+                hover = null;
             }
         }
         else if (Input.GetMouseButtonUp(1))
@@ -84,6 +86,7 @@ public class MoveableObject : MonoBehaviour
         GameObject newTower = Instantiate(towerSingle, mousePosition, Quaternion.identity);
         selectedObject = newTower;
         selectedObject.layer = layerIgnoreRaycast;
+        hover = selectedObject.transform.GetChild(0).gameObject;
         hover.SetActive(true);
         LevelManager.Instance.SetMoney(-50);
     }
@@ -94,6 +97,7 @@ public class MoveableObject : MonoBehaviour
         GameObject newTower = Instantiate(towerArea, mousePosition, Quaternion.identity);
         selectedObject = newTower;
         selectedObject.layer = layerIgnoreRaycast;
+        hover = selectedObject.transform.GetChild(0).gameObject;
         hover.SetActive(true);
         LevelManager.Instance.SetMoney(-50);
     }
@@ -104,6 +108,7 @@ public class MoveableObject : MonoBehaviour
         GameObject newTower = Instantiate(towerDebuff, mousePosition, Quaternion.identity);
         selectedObject = newTower;
         selectedObject.layer = layerIgnoreRaycast;
+        hover = selectedObject.transform.GetChild(0).gameObject;
         hover.SetActive(true);
         LevelManager.Instance.SetMoney(-100);
     }
