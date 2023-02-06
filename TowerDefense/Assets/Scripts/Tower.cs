@@ -5,21 +5,22 @@ using UnityEngine;
 
 public class Tower : MonoBehaviour
 {
+    [SerializeField] private TowerType type;
     [SerializeField] protected int price;
     [SerializeField] protected int upgradePrice;
     [SerializeField] private GameObject upgrade;
+    [SerializeField] private TowerAttack towerRange;
     protected bool upgradeAvailable = false;
     protected bool upgraded = false;
 
-    protected enum DamageType
-    {
-        single,
-        area,
-        special
-    }
+    private ITowersDamage _towersDamage;
+    private float timer;
 
-    [SerializeField] protected DamageType damage;
-    protected int damageValue = 0;
+    public ITowersDamage _currentDamage
+    {
+        get => _towersDamage;
+        set => _towersDamage = value;
+    }
 
     public int GetPrice()
     {
@@ -28,28 +29,50 @@ public class Tower : MonoBehaviour
 
     private void Update()
     {
-       
-    }
-
-    public int GetDamage()
-    {
-        switch (damage)
+        if (timer > type.GetWaitingTime())
         {
-            case DamageType.single:
-                damageValue = 10;
-                break;
-            case DamageType.area:
-                damageValue = 15;
-                break;
-            case DamageType.special:
-                damageValue = 0;
-                break;
-            default:
-                break;
+            if (type.GetDamage() == TowerType.DamageType.single)
+            {
+                _currentDamage = new TowerSingleDamage();
+                _currentDamage?.Use(towerRange);
+                timer = 0;
+            }
+            if (type.GetDamage() == TowerType.DamageType.area)
+            {
+                _currentDamage = new TowerAreaDamage();
+                _currentDamage?.Use(towerRange);
+                timer = 0;
+            }
+            if (type.GetDamage() == TowerType.DamageType.special)
+            {
+                _currentDamage = new TowerDebuffDamage();
+                _currentDamage?.Use(towerRange);
+                timer = 0;
+            }
         }
-
-        return damageValue;
+        
+        timer += Time.deltaTime;
     }
+
+    // public int GetDamage()
+    // {
+    //     switch (damage)
+    //     {
+    //         case DamageType.single:
+    //             damageValue = 10;
+    //             break;
+    //         case DamageType.area:
+    //             damageValue = 15;
+    //             break;
+    //         case DamageType.special:
+    //             damageValue = 0;
+    //             break;
+    //         default:
+    //             break;
+    //     }
+    //
+    //     return damageValue;
+    // }
 
     protected void UpgradeTower()
     {

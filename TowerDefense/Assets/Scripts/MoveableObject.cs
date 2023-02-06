@@ -56,6 +56,8 @@ public class MoveableObject : MonoBehaviour
         }
         else if (Input.GetMouseButtonUp(1))
         {
+
+
             if (!selectedObject && LevelManager.Instance.Upgrade())
             {
                 Debug.Log("Upgrading");

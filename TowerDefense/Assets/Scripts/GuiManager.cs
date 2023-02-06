@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class GuiManager : MonoBehaviour
 {
@@ -9,8 +10,9 @@ public class GuiManager : MonoBehaviour
     public TMP_Text moneyNumber;
     public TMP_Text livesNumber;
     public TMP_Text timeNumber;
+    public GameObject inventory;
 
-    public LevelManager _levelManager;
+    public LevelManager levelManager;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,13 +21,22 @@ public class GuiManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        waveNumber.text = "Wave: " + _levelManager.GetWave();
-        moneyNumber.text = "Money: " + _levelManager.GetMoney();
-        livesNumber.text = "Lives left: " + _levelManager.GetLives();
+        waveNumber.text = "Wave: " + levelManager.GetWave();
+        moneyNumber.text = "Money: " + levelManager.GetMoney();
+        livesNumber.text = "Lives left: " + levelManager.GetLives();
 
-        float minutes = Mathf.FloorToInt(_levelManager.GetTime() / 60);
-        float seconds = Mathf.FloorToInt(_levelManager.GetTime() % 60);
+        float minutes = Mathf.FloorToInt(levelManager.GetTime() / 60);
+        float seconds = Mathf.FloorToInt(levelManager.GetTime() % 60);
 
         timeNumber.text = string.Format("{0:00}:{1:00}", minutes,seconds);
+
+        if (levelManager.waveInProgress)
+        {
+            inventory.SetActive(false);
+        }
+        else
+        {
+            inventory.SetActive(true);
+        }
     }
 }

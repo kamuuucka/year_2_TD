@@ -5,9 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "TowerType")]
 public class TowerType : ScriptableObject
 {
-    [SerializeField] private int price;
-
-    private enum DamageType
+    public enum DamageType
     {
         single,
         area,
@@ -15,4 +13,15 @@ public class TowerType : ScriptableObject
     }
 
     [SerializeField] private DamageType damage;
+    [SerializeField] private float waitTime;
+
+    public DamageType GetDamage()
+    {
+        return damage;
+    }
+
+    public float GetWaitingTime()
+    {
+        return waitTime;
+    }
 }

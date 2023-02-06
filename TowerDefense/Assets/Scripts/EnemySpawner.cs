@@ -8,7 +8,9 @@ public class EnemySpawner : MonoBehaviour
     public int waveNumber = 0;
     private bool lastEnemy = false;
 
-    private int enemySpawned = 0;
+    //private int enemySpawned = 0;
+
+    private int enemiesOnBoard = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,40 +20,29 @@ public class EnemySpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyUp(KeyCode.Return)){
-            //Debug.Log("WAVE: " + waveNumber);
+        if (Input.GetKeyUp(KeyCode.Return) || LevelManager.Instance.waveStart){
             lastEnemy = false;
-            StartCoroutine(SpawnEnemies(levels[waveNumber].enemyFast, levels[waveNumber].waitTime, levels[waveNumber].numberOfFastEnemies, false));
-            StartCoroutine(SpawnEnemies(levels[waveNumber].enemySlow, levels[waveNumber].waitTime, levels[waveNumber].numberOfSlowEnemies, true));
+            LevelManager.Instance.waveStart = false;
+            LevelManager.Instance.waveInProgress = true;
+            enemiesOnBoard = 0;
+            StartCoroutine(SpawnEnemies(levels[waveNumber].enemyFast, levels[waveNumber].waitTime, levels[waveNumber].numberOfFastEnemies));
+            StartCoroutine(SpawnEnemies(levels[waveNumber].enemySlow, levels[waveNumber].waitTime, levels[waveNumber].numberOfSlowEnemies));
         }
     }
 
-    IEnumerator SpawnEnemies(GameObject enemy, float waitTime, int count, bool hasLastEnemy)
+    IEnumerator SpawnEnemies(GameObject enemy, float waitTime, int count)
     {
-        //Debug.Log("Start spawning enemies");
-        enemySpawned = 0;
+        int enemySpawned = 0;
         while (enemySpawned < count)
         {
+            LevelManager.Instance.SetNumberOfEnemies(1);
+            Debug.Log("Start spawning " + count + " enemies. Enemy: " + enemySpawned);
             GameObject newEnemy = Instantiate(enemy, this.transform.position, Quaternion.identity);
             newEnemy.transform.SetParent(this.transform);
             newEnemy.name += enemySpawned;
-            if (enemySpawned + 1 == count)
-            {
-                newEnemy.GetComponent<Enemy>().SetLast();
-            }
             yield return new WaitForSeconds(waitTime);
             enemySpawned++;
         }
-
-        // if (hasLastEnemy)
-        // {
-        //     waveNumber++;
-        //     lastEnemy = true;
-        // }
-    }
-
-    public bool GetLastEnemy()
-    {
-        return lastEnemy;
+        Debug.Log("No more enemies");
     }
 }

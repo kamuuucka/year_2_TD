@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 
 public class LevelManager : MonoBehaviour
 {
@@ -12,10 +13,16 @@ public class LevelManager : MonoBehaviour
     private int money = 0;
     private int lives = 5;
 
-    private float timer = 90.0f;
+    private float timer = 5.0f;
 
     private Waypoints waypoints;
     private bool upgrade = false;
+    private int enemiesOnBoard = 0;
+    public bool waveStart = false;
+    public bool waveInProgress = false;
+    public bool buyPhase = false;
+    
+    
 
     private void Awake()
     {
@@ -31,7 +38,20 @@ public class LevelManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        timer -= Time.deltaTime;
+        if (!waveInProgress)
+        {
+            timer -= Time.deltaTime;
+            if (timer <= 0)
+            {
+                waveStart = true;
+                timer = 60.0f;
+            }
+        }
+
+        if (enemiesOnBoard <= 0)
+        {
+            waveInProgress = false;
+        }
 
         if (Input.GetKeyUp(KeyCode.L))
         {
@@ -102,5 +122,17 @@ public class LevelManager : MonoBehaviour
     {
         Debug.Log(upgrade);
         return upgrade;
+    }
+
+    public int GetNumberOfEnemies()
+    {
+        return enemiesOnBoard;
+    }
+
+    public void SetNumberOfEnemies(int number)
+    {
+        enemiesOnBoard += number;
+        //Debug.Log("Enemies in the game: " + enemiesOnBoard);
+        
     }
 }
