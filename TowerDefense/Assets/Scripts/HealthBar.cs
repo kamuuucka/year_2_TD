@@ -8,10 +8,15 @@ using UnityEngine.UI;
 public class HealthBar : MonoBehaviour
 {
     public Slider slider;
+    //[ColorUsage(false)]
     public Color lowHealth;
+    //[ColorUsage(false)]
     public Color highHealth;
     public Vector3 offset;
     public TMP_Text moneyNumber;
+
+    public float health;
+    public float maxHealth;
 
     private void Update()
     {
@@ -19,8 +24,14 @@ public class HealthBar : MonoBehaviour
         moneyNumber.transform.position = Camera.main.WorldToScreenPoint(transform.parent.position);
     }
 
+    private void OnValidate()
+    {
+        SetHealth(health,maxHealth);
+    }
+
     public void SetHealth(float health, float maxHealth)
     {
+        Debug.Log(health + " : " + maxHealth);
         slider.gameObject.SetActive(health < maxHealth);
         slider.value = health;
         slider.maxValue = maxHealth;
