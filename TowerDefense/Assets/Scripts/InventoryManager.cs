@@ -19,23 +19,34 @@ public class InventoryManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //tower debuff
         if (LevelManager.Instance.GetMoney() >= 100)
         {
             slot3.color = new Vector4(0.4f, 0.1f, 0.4f, 1);
         }
-
-        else if(LevelManager.Instance.GetMoney() >= 50)
+        else
         {
-            slot2.color = new Vector4(0, 1, 0.2f, 1);
-            slot1.color = new Vector4(1, 1f, 1f, 1);
-            slot3.color = new Vector4(0.4f, 0.1f, 0.4f, 0.2f); ;
+            slot3.color = new Vector4(0.4f, 0.1f, 0.4f, 0.2f); 
         }
 
+        //tower area
+        if(LevelManager.Instance.GetMoney() >= 50)
+        {
+            slot2.color = new Vector4(0, 1, 0.2f, 1);
+        }
         else
         {
             slot2.color = new Vector4(0, 1, 0.2f, 0.2f);
+        }
+        
+        //tower single
+        if(LevelManager.Instance.GetMoney() >= LevelManager.Instance.GetSingleTowerPrice())
+        {
+            slot1.color = new Vector4(1, 1f, 1f, 1);
+        }
+        else
+        {
             slot1.color = new Vector4(1, 1f, 1f, 0.2f);
-            slot3.color = new Vector4(0.4f, 0.1f, 0.4f, 0.2f); ;
         }
     }
 }

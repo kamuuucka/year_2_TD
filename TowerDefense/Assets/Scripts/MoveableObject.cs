@@ -56,11 +56,14 @@ public class MoveableObject : MonoBehaviour
         }
         else if (Input.GetMouseButtonUp(1))
         {
-
-
-            if (!selectedObject && LevelManager.Instance.Upgrade())
+            if (!selectedObject)
             {
-                Debug.Log("Upgrading");
+                Collider2D targetObject = Physics2D.OverlapPoint(mousePosition);
+                Debug.Log(targetObject.name);
+                if (targetObject.GetComponent<TowerBase>().upgradeAvailable)
+                {
+                    Debug.Log("Upgrading");
+                }
             }
         }
         if (selectedObject)

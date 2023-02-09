@@ -21,6 +21,7 @@ public class LevelManager : MonoBehaviour
     public bool waveStart = false;
     public bool waveInProgress = false;
     public bool buyPhase = false;
+    private int singleTowerPrice = 0;
     
     
 
@@ -38,6 +39,8 @@ public class LevelManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
+        Debug.Log(singleTowerPrice);
         if (!waveInProgress)
         {
             timer -= Time.deltaTime;
@@ -60,7 +63,7 @@ public class LevelManager : MonoBehaviour
 
         if (Input.GetKeyUp(KeyCode.M))
         {
-            money++;
+            money+=50;
         }
         else if (Input.GetKeyDown(KeyCode.N))
         {
@@ -134,5 +137,15 @@ public class LevelManager : MonoBehaviour
         enemiesOnBoard += number;
         //Debug.Log("Enemies in the game: " + enemiesOnBoard);
         
+    }
+
+    public int GetSingleTowerPrice()
+    {
+        return singleTowerPrice;
+    }
+
+    public void SetSingleTowePrice(int towerPrice)
+    {
+        this.singleTowerPrice = towerPrice;
     }
 }
