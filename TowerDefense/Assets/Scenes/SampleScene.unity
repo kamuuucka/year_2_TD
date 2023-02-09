@@ -792,7 +792,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62acc676c9e6e4f078bbc32ec66b4fd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: {fileID: 11400000, guid: ac59dba6e2536408ba94f260a84f4408, type: 2}
   price: 50
   upgradePrice: 50
   upgrade: {fileID: 2122762919}
@@ -814,7 +813,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62acc676c9e6e4f078bbc32ec66b4fd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: {fileID: 11400000, guid: 2a0aa732417a44f1fafcae5548cf9c09, type: 2}
   price: 50
   upgradePrice: 50
   upgrade: {fileID: 1714130682}
@@ -824,6 +822,22 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1925864172452046850, guid: 94814756083264096b975002707b2fbf, type: 3}
   m_PrefabInstance: {fileID: 2002236589}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &702081640
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 702081630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5797dd1cca3d29e4c98cef71d1a8f620, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  price: 0
+  upgradePrice: 0
+  upgrade: {fileID: 1714130682}
+  towerRange: {fileID: 931637243}
 --- !u!1 &713090702
 GameObject:
   m_ObjectHideFlags: 0
@@ -4408,7 +4422,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62acc676c9e6e4f078bbc32ec66b4fd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: {fileID: 11400000, guid: 49e149cd1d01944078f4bbc549ff8bfa, type: 2}
   price: 50
   upgradePrice: 50
   upgrade: {fileID: 2113272827}

@@ -27,11 +27,6 @@ public class Enemy : MonoBehaviour
 
     private bool dead = false;
 
-    //TODO: HEALTHBAR
-    // Start is called before the first frame update
-
-    
-
     void Start()
     {
         oldSpeed = speed;
@@ -45,8 +40,6 @@ public class Enemy : MonoBehaviour
     {
         if (waypoint == waypoints.Length)
         {
-            
-            
             LevelManager.Instance.SetLives(1);
             LevelManager.Instance.SetNumberOfEnemies(-1);
             waypoint = 0;

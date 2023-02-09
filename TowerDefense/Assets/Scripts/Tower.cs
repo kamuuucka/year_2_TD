@@ -5,15 +5,15 @@ using UnityEngine;
 
 public class Tower : MonoBehaviour
 {
-    [SerializeField] private TowerType type;
-    [SerializeField] protected int price;
-    [SerializeField] protected int upgradePrice;
+    [HideInInspector][SerializeField] private int price;
+    [SerializeField] private int upgradePrice;
     [SerializeField] private GameObject upgrade;
     [SerializeField] private TowerAttack towerRange;
+
     protected bool upgradeAvailable = false;
     protected bool upgraded = false;
 
-    private ITowersDamage _towersDamage;
+    public ITowersDamage _towersDamage;
     private float timer;
 
     public ITowersDamage _currentDamage
@@ -29,50 +29,15 @@ public class Tower : MonoBehaviour
 
     private void Update()
     {
-        if (timer > type.GetWaitingTime())
+        if (timer > 0.5f)
         {
-            if (type.GetDamage() == TowerType.DamageType.single)
-            {
-                _currentDamage = new TowerSingleDamage();
-                _currentDamage?.Use(towerRange);
-                timer = 0;
-            }
-            if (type.GetDamage() == TowerType.DamageType.area)
-            {
-                _currentDamage = new TowerAreaDamage();
-                _currentDamage?.Use(towerRange);
-                timer = 0;
-            }
-            if (type.GetDamage() == TowerType.DamageType.special)
-            {
-                _currentDamage = new TowerDebuffDamage();
-                _currentDamage?.Use(towerRange);
-                timer = 0;
-            }
+            _towersDamage?.Use(towerRange);
+            timer = 0;
         }
-        
-        timer += Time.deltaTime;
-    }
 
-    // public int GetDamage()
-    // {
-    //     switch (damage)
-    //     {
-    //         case DamageType.single:
-    //             damageValue = 10;
-    //             break;
-    //         case DamageType.area:
-    //             damageValue = 15;
-    //             break;
-    //         case DamageType.special:
-    //             damageValue = 0;
-    //             break;
-    //         default:
-    //             break;
-    //     }
-    //
-    //     return damageValue;
-    // }
+        timer += Time.deltaTime;
+        
+    }
 
     protected void UpgradeTower()
     {
