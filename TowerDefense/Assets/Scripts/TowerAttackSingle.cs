@@ -4,15 +4,8 @@ using UnityEngine;
 
 public class TowerAttackSingle : WeaponManager
 {
-   
-   public TowerAttackSingle()
+    public TowerAttackSingle()
     {
         _towersDamage = new TowerSingleDamage();
-        
     }
-
-   private void Update()
-   {
-       LevelManager.Instance.SetSingleTowePrice(GetPrice());
-   }
 }

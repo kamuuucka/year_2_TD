@@ -9,6 +9,10 @@ public class InventoryManager : MonoBehaviour
     public Image slot2;
     public Image slot3;
 
+    private int singleTowerPrice;
+    private int areaTowerPrice;
+    private int debuffTowerPrice;
+
 
     // Start is called before the first frame update
     void Start()
@@ -20,7 +24,7 @@ public class InventoryManager : MonoBehaviour
     void Update()
     {
         //tower debuff
-        if (LevelManager.Instance.GetMoney() >= 100)
+        if (LevelManager.Instance.GetMoney() >= debuffTowerPrice)
         {
             slot3.color = new Vector4(0.4f, 0.1f, 0.4f, 1);
         }
@@ -30,7 +34,7 @@ public class InventoryManager : MonoBehaviour
         }
 
         //tower area
-        if(LevelManager.Instance.GetMoney() >= 50)
+        if(LevelManager.Instance.GetMoney() >= areaTowerPrice)
         {
             slot2.color = new Vector4(0, 1, 0.2f, 1);
         }
@@ -40,7 +44,7 @@ public class InventoryManager : MonoBehaviour
         }
         
         //tower single
-        if(LevelManager.Instance.GetMoney() >= LevelManager.Instance.GetSingleTowerPrice())
+        if(LevelManager.Instance.GetMoney() >= singleTowerPrice)
         {
             slot1.color = new Vector4(1, 1f, 1f, 1);
         }
@@ -49,4 +53,12 @@ public class InventoryManager : MonoBehaviour
             slot1.color = new Vector4(1, 1f, 1f, 0.2f);
         }
     }
+
+    public void SetUpPrices(int singleTowerPrice, int areaTowerPrice, int debuffTowerPrice)
+    {
+        this.singleTowerPrice = singleTowerPrice;
+        this.areaTowerPrice = areaTowerPrice;
+        this.debuffTowerPrice = debuffTowerPrice;
+    }
+    
 }

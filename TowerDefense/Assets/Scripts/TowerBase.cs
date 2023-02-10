@@ -9,6 +9,8 @@ public class TowerBase : MonoBehaviour
     [SerializeField] private TowerAttack towerRange;
     [SerializeField] private WeaponManager _weaponManager;
     [SerializeField] private int upgradeJump;
+    [SerializeField] private int price;
+    [SerializeField] private int upgradePrice;
 
     private bool upgradeAvailable = false;
     private bool upgraded = false;
@@ -21,19 +23,31 @@ public class TowerBase : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log("Your money: "+LevelManager.Instance.GetMoney());
-        Debug.Log("Tower upgrade price: " +_weaponManager.GetUpgradePrice());
-        // if (LevelManager.Instance.GetMoney() >= _weaponManager.GetUpgradePrice())
-        // {
-        //     //Debug.Log("upgrade available");
-        //     upgradeAvailable = true;
-        // }
-        // else
-        // {
-        //     upgradeAvailable = false;
-        // }
+        //Debug.Log("Your money: "+LevelManager.Instance.GetMoney());
+        //Debug.Log("Tower upgrade price: " +_weaponManager.GetUpgradePrice());
+         if (LevelManager.Instance.GetMoney() >= upgradePrice)//_weaponManager.GetUpgradePrice())
+         {
+             //Debug.Log("upgrade available");
+             upgradeAvailable = true;
+             upgrade.SetActive(true);
+         }
+         else
+         {
+             upgradeAvailable = false;
+         }
+         
+         if (upgraded)
+         {
+             LevelManager.Instance.SetMoney((-upgradePrice));
+             upgraded = false;
+             upgrade.SetActive(false);
+             upgradePrice += upgradeJump;
+         }
     }
-
+    public int GetPrice()
+    {
+        return price;
+    }
     public bool GetTowerUpgrade()
     {
         return upgradeAvailable;
@@ -46,19 +60,6 @@ public class TowerBase : MonoBehaviour
     
     public void UpgradeTower()
     {
-        upgradeAvailable = LevelManager.Instance.Upgrade();
         
-        if (upgradeAvailable)
-        {
-            Debug.Log("You can afford an upgrade!");
-            upgrade.SetActive(true);
-        }
-        
-        if (upgraded)
-        {
-            upgraded = false;
-            upgrade.SetActive(false);
-            _weaponManager.SetUpgradePrice(50);
-        }
     }
 }

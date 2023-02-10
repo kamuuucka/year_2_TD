@@ -5,11 +5,13 @@ using UnityEngine;
 
 public class WeaponManager : MonoBehaviour
 {
-    [SerializeField] private int price;
-    [SerializeField] private int upgradePrice;
     private TowerAttack towerRange;
     public ITowersDamage _towersDamage;
     private float timer;
+
+    private int singleTowerPrice = 0;
+    private int areaTowerPrice = 0;
+    private int debuffTowerPrice = 0;
 
     public void SetTowerRange(TowerAttack towerAttack)
     {
@@ -28,25 +30,5 @@ public class WeaponManager : MonoBehaviour
         }
 
         timer += Time.deltaTime;
-        //Debug.Log("Upgrade tower price: " + upgradePrice);
-        
-    }
-    
-    //Used to mark when tower can be bought -
-    //needs a link with inventory manager -
-    //through level manager or by just adding prefab to the inventory manager
-    public int GetPrice()
-    {
-        return price;
-    }
-
-    public int GetUpgradePrice()
-    {
-        return upgradePrice;
-    }
-
-    public void SetUpgradePrice(int price)
-    {
-        upgradePrice += price;
     }
 }

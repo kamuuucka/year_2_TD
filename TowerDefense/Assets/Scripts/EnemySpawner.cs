@@ -36,13 +36,13 @@ public class EnemySpawner : MonoBehaviour
         while (enemySpawned < count)
         {
             LevelManager.Instance.SetNumberOfEnemies(1);
-            Debug.Log("Start spawning " + count + " enemies. Enemy: " + enemySpawned);
+            //Debug.Log("Start spawning " + count + " enemies. Enemy: " + enemySpawned);
             GameObject newEnemy = Instantiate(enemy, this.transform.position, Quaternion.identity);
             newEnemy.transform.SetParent(this.transform);
             newEnemy.name += enemySpawned;
             yield return new WaitForSeconds(waitTime);
             enemySpawned++;
         }
-        Debug.Log("No more enemies");
+        //Debug.Log("No more enemies");
     }
 }

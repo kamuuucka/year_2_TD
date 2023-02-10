@@ -10,10 +10,10 @@ public class LevelManager : MonoBehaviour
     public static LevelManager Instance { get; private set; }
     
     private int wave = 0;
-    private int money = 0;
+    private int money = 150;
     private int lives = 5;
 
-    private float timer = 5.0f;
+    private float timer = 60.0f;
 
     private Waypoints waypoints;
     private bool upgrade = false;
@@ -40,7 +40,7 @@ public class LevelManager : MonoBehaviour
     void Update()
     {
         
-        Debug.Log(singleTowerPrice);
+        //Debug.Log(singleTowerPrice);
         if (!waveInProgress)
         {
             timer -= Time.deltaTime;
@@ -60,7 +60,7 @@ public class LevelManager : MonoBehaviour
         {
             wave++;
         }
-
+        
         if (Input.GetKeyUp(KeyCode.M))
         {
             money+=50;
@@ -123,7 +123,6 @@ public class LevelManager : MonoBehaviour
 
     public bool Upgrade()
     {
-        Debug.Log(upgrade);
         return upgrade;
     }
 
@@ -135,11 +134,9 @@ public class LevelManager : MonoBehaviour
     public void SetNumberOfEnemies(int number)
     {
         enemiesOnBoard += number;
-        //Debug.Log("Enemies in the game: " + enemiesOnBoard);
-        
     }
 
-    public int GetSingleTowerPrice()
+    public int GetSingleTowerPrice( )
     {
         return singleTowerPrice;
     }
