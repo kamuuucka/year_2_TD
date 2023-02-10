@@ -60,9 +60,10 @@ public class MoveableObject : MonoBehaviour
             {
                 Collider2D targetObject = Physics2D.OverlapPoint(mousePosition);
                 Debug.Log(targetObject.name);
-                if (targetObject.GetComponent<TowerBase>().upgradeAvailable)
+                if (targetObject.GetComponent<TowerBase>().GetTowerUpgrade())
                 {
                     Debug.Log("Upgrading");
+                    targetObject.GetComponent<TowerBase>().Upgrade();
                 }
             }
         }

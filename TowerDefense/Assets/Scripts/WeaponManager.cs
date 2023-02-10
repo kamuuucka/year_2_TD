@@ -6,6 +6,7 @@ using UnityEngine;
 public class WeaponManager : MonoBehaviour
 {
     [SerializeField] private int price;
+    [SerializeField] private int upgradePrice;
     private TowerAttack towerRange;
     public ITowersDamage _towersDamage;
     private float timer;
@@ -27,6 +28,7 @@ public class WeaponManager : MonoBehaviour
         }
 
         timer += Time.deltaTime;
+        //Debug.Log("Upgrade tower price: " + upgradePrice);
         
     }
     
@@ -36,5 +38,15 @@ public class WeaponManager : MonoBehaviour
     public int GetPrice()
     {
         return price;
+    }
+
+    public int GetUpgradePrice()
+    {
+        return upgradePrice;
+    }
+
+    public void SetUpgradePrice(int price)
+    {
+        upgradePrice += price;
     }
 }

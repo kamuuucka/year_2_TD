@@ -781,7 +781,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62acc676c9e6e4f078bbc32ec66b4fd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  price: 0
+  price: 50
+  upgradePrice: 50
 --- !u!4 &702081639 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1925864172452046850, guid: 94814756083264096b975002707b2fbf, type: 3}
@@ -799,11 +800,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce5143876abe4afcaf5b3c14673b7675, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  upgradePrice: 0
   upgrade: {fileID: 1714130682}
   towerRange: {fileID: 931637243}
   _weaponManager: {fileID: 1352086098}
-  upgradeAvailable: 1
+  upgradeJump: 50
 --- !u!1 &713090702
 GameObject:
   m_ObjectHideFlags: 0
@@ -1873,6 +1873,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   price: 50
+  upgradePrice: 0
 --- !u!1 &1363470285
 GameObject:
   m_ObjectHideFlags: 0
