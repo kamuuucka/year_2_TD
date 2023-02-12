@@ -1,17 +1,25 @@
-    
-    using System.Collections.Generic;
-    using UnityEngine;
-    
-    public class TowerAreaDamage : ITowersDamage
+using System.Collections.Generic;
+
+/// <summary>
+/// Interface of area tower
+/// </summary>
+public class TowerAreaDamage : ITowersDamage
+{
+    private int _damage;
+    private List<Enemy> _enemies;
+
+    public void Use(TowerRange range, int damage)
     {
-        private int damage = 15;
-        private List<Enemy> _enemies;
-        public void Use(TowerAttack range)
+        _damage = damage;
+        _enemies = range.GetEnemies();
+        foreach (Enemy enemy in _enemies)
         {
-            _enemies = range.GetEnemies();
-            foreach (Enemy enemy in _enemies)
-            {
-                enemy.AttackEnemy(damage);
-            }
+            enemy.AttackEnemy(_damage);
         }
     }
+
+    public void Upgrade(int addition)
+    {
+        _damage += addition;
+    }
+}

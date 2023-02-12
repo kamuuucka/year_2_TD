@@ -1,64 +1,63 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Class responsible for showing towers on the inventory slot
+/// </summary>
 public class InventoryManager : MonoBehaviour
 {
-    public Image slot1;
-    public Image slot2;
-    public Image slot3;
+    [SerializeField] private Image slot1;
+    [SerializeField] private Image slot2;
+    [SerializeField] private Image slot3;
 
-    private int singleTowerPrice;
-    private int areaTowerPrice;
-    private int debuffTowerPrice;
-
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
+    private int _singleTowerPrice;
+    private int _areaTowerPrice;
+    private int _debuffTowerPrice;
+    
     void Update()
     {
         //tower debuff
-        if (LevelManager.Instance.GetMoney() >= debuffTowerPrice)
+        if (LevelManager.Instance.GetMoney() >= _debuffTowerPrice)
         {
-            slot3.color = new Vector4(0.4f, 0.1f, 0.4f, 1);
+            slot3.color = new Vector4(0, 0.7f, 1, 1);
         }
         else
         {
-            slot3.color = new Vector4(0.4f, 0.1f, 0.4f, 0.2f); 
+            slot3.color = new Vector4(0.5f, 0.5f, 0.5f, 1); 
         }
 
         //tower area
-        if(LevelManager.Instance.GetMoney() >= areaTowerPrice)
+        if(LevelManager.Instance.GetMoney() >= _areaTowerPrice)
         {
-            slot2.color = new Vector4(0, 1, 0.2f, 1);
+            slot2.color = new Vector4(0.5f, 0, 1, 1);
         }
         else
         {
-            slot2.color = new Vector4(0, 1, 0.2f, 0.2f);
+            slot2.color = new Vector4(0.5f, 0.5f, 0.5f, 1);
         }
         
         //tower single
-        if(LevelManager.Instance.GetMoney() >= singleTowerPrice)
+        if(LevelManager.Instance.GetMoney() >= _singleTowerPrice)
         {
-            slot1.color = new Vector4(1, 1f, 1f, 1);
+            slot1.color = new Vector4(1, 0.5f, 0, 1);
         }
         else
         {
-            slot1.color = new Vector4(1, 1f, 1f, 0.2f);
+            slot1.color = new Vector4(0.5f, 0.5f, 0.5f, 1);
         }
     }
 
+    /// <summary>
+    /// Method used for the first setup of prices
+    /// </summary>
+    /// <param name="singleTowerPrice"></param>
+    /// <param name="areaTowerPrice"></param>
+    /// <param name="debuffTowerPrice"></param>
     public void SetUpPrices(int singleTowerPrice, int areaTowerPrice, int debuffTowerPrice)
     {
-        this.singleTowerPrice = singleTowerPrice;
-        this.areaTowerPrice = areaTowerPrice;
-        this.debuffTowerPrice = debuffTowerPrice;
+        _singleTowerPrice = singleTowerPrice;
+        _areaTowerPrice = areaTowerPrice;
+        _debuffTowerPrice = debuffTowerPrice;
     }
     
 }

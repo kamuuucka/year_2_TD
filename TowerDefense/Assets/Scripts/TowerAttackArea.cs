@@ -1,8 +1,10 @@
-
-    public class TowerAttackArea : WeaponManager
+/// <summary>
+/// Class defining area tower
+/// </summary>
+public class TowerAttackArea : WeaponManager
+{
+    public TowerAttackArea()
     {
-        public TowerAttackArea()
-        {
-            _towersDamage = new TowerAreaDamage();
-        }
+        TowersDamage = new TowerAreaDamage();
     }
+}

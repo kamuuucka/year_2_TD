@@ -1,19 +1,25 @@
+using System.Collections.Generic;
 
-    using System.Collections.Generic;
-    using UnityEngine;
-    using UnityEngine.UIElements;
+/// <summary>
+/// Interface responsible for single tower
+/// </summary>
+public class TowerSingleDamage : ITowersDamage
+{
+    private int _damage;
+    private List<Enemy> _enemies;
 
-    public class TowerSingleDamage : ITowersDamage
+    public void Use(TowerRange range, int damage)
     {
-        private int damage = 10;
-        private List<Enemy> _enemies;
-        public void Use(TowerAttack range)
+        _damage = damage;
+        _enemies = range.GetEnemies();
+        if (range.EnemyInRange > 0)
         {
-            _enemies = range.GetEnemies();
-            if (range.EnemyInRange > 0)
-            {
-                Debug.Log("shooting at: " + _enemies[0].name);
-                _enemies[0].AttackEnemy(damage);
-            }
+            _enemies[0].AttackEnemy(_damage);
         }
     }
+
+    public void Upgrade(int addition)
+    {
+        _damage += addition;
+    }
+}

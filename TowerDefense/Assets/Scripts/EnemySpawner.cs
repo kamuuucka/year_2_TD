@@ -1,48 +1,50 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Class responsible for spawning enemies and setting up levels
+/// </summary>
 public class EnemySpawner : MonoBehaviour
 {
-    public WaveDefinition[] levels;
-    public int waveNumber = 0;
-    private bool lastEnemy = false;
-
-    //private int enemySpawned = 0;
-
-    private int enemiesOnBoard = 0;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] private WaveDefinition[] levels;
+    private int _waveNumber;
+   
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyUp(KeyCode.Return) || LevelManager.Instance.waveStart){
-            lastEnemy = false;
-            LevelManager.Instance.waveStart = false;
-            LevelManager.Instance.waveInProgress = true;
-            enemiesOnBoard = 0;
-            StartCoroutine(SpawnEnemies(levels[waveNumber].enemyFast, levels[waveNumber].waitTime, levels[waveNumber].numberOfFastEnemies));
-            StartCoroutine(SpawnEnemies(levels[waveNumber].enemySlow, levels[waveNumber].waitTime, levels[waveNumber].numberOfSlowEnemies));
+        _waveNumber = LevelManager.Instance.GetWave();
+        if (!LevelManager.Instance.GetWaveInProgress())
+        {
+            LevelManager.Instance.SetNumberOfEnemies(levels[_waveNumber].numberOfFastEnemies + levels[_waveNumber].numberOfSlowEnemies);
+        }
+        if (Input.GetKeyUp(KeyCode.Return) || LevelManager.Instance.GetWaveStart())
+        {
+            
+            LevelManager.Instance.SetWaveStart(false);
+            LevelManager.Instance.SetWaveInProgress(true);
+            StartCoroutine(SpawnEnemies(levels[_waveNumber].enemyFast, levels[_waveNumber].waitTime, levels[_waveNumber].numberOfFastEnemies));
+            StartCoroutine(SpawnEnemies(levels[_waveNumber].enemySlow, levels[_waveNumber].waitTime, levels[_waveNumber].numberOfSlowEnemies));
         }
     }
 
+    /// <summary>
+    /// Spawn enemies after a delay
+    /// </summary>
+    /// <param name="enemy"></param>
+    /// <param name="waitTime"></param>
+    /// <param name="count"></param>
+    /// <returns></returns>
     IEnumerator SpawnEnemies(GameObject enemy, float waitTime, int count)
     {
         int enemySpawned = 0;
         while (enemySpawned < count)
         {
-            LevelManager.Instance.SetNumberOfEnemies(1);
-            //Debug.Log("Start spawning " + count + " enemies. Enemy: " + enemySpawned);
             GameObject newEnemy = Instantiate(enemy, this.transform.position, Quaternion.identity);
             newEnemy.transform.SetParent(this.transform);
             newEnemy.name += enemySpawned;
             yield return new WaitForSeconds(waitTime);
             enemySpawned++;
         }
-        //Debug.Log("No more enemies");
     }
 }

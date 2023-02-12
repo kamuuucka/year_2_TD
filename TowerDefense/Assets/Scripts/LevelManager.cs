@@ -1,78 +1,59 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.Serialization;
 
+/// <summary>
+/// Level manager responsible for gameplay
+/// </summary>
 public class LevelManager : MonoBehaviour
 {
     public static LevelManager Instance { get; private set; }
     
-    private int wave = 0;
-    private int money = 150;
-    private int lives = 5;
-
-    private float timer = 60.0f;
-
-    private Waypoints waypoints;
-    private bool upgrade = false;
-    private int enemiesOnBoard = 0;
-    public bool waveStart = false;
-    public bool waveInProgress = false;
-    public bool buyPhase = false;
-    private int singleTowerPrice = 0;
+    [SerializeField] private int money = 150;
+    [SerializeField] private int lives = 5;
+    [SerializeField] private float timer = 30.0f;
+    
+    private int _wave;
+    private int _enemiesOnBoard = 1;
+    private Waypoints _waypoints;
+    private bool _upgrade;
+    private bool _waveStart;
+    private bool _waveInProgress;
+    private float _setTime;
     
     
-
     private void Awake()
     {
         Instance = this;
+        _setTime = timer;
     }
-
-    // Start is called before the first frame update
+    
     void Start()
     {
-        waypoints = GetComponentInChildren<Waypoints>();
+        _waypoints = GetComponentInChildren<Waypoints>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
-        //Debug.Log(singleTowerPrice);
-        if (!waveInProgress)
+        if (!_waveInProgress)
         {
             timer -= Time.deltaTime;
             if (timer <= 0)
             {
-                waveStart = true;
-                timer = 60.0f;
+                _waveStart = true;
+                _waveInProgress = true;
+                timer = _setTime;
             }
         }
-
-        if (enemiesOnBoard <= 0)
+        else
         {
-            waveInProgress = false;
+            timer = _setTime;
         }
 
-        if (Input.GetKeyUp(KeyCode.L))
+        if (_enemiesOnBoard <= 0 && _waveInProgress)
         {
-            wave++;
-        }
-        
-        if (Input.GetKeyUp(KeyCode.M))
-        {
-            money+=50;
-        }
-        else if (Input.GetKeyDown(KeyCode.N))
-        {
-            money--;
-        }
-        
-        if (Input.GetKeyUp(KeyCode.A))
-        {
-            upgrade = true;
+            _waveInProgress = false;
+            _wave++;
         }
 
         if (lives <= 0)
@@ -81,68 +62,119 @@ public class LevelManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Method used to share the wave number with other objects
+    /// </summary>
+    /// <returns></returns>
     public int GetWave()
     {
-        return wave;
+        return _wave;
+    }
+    
+    /// <summary>
+    /// Method used to share the waypoint list with other objects
+    /// </summary>
+    /// <returns></returns>
+    public Waypoints GetWaypoints()
+    {
+        return _waypoints;
     }
 
+    /// <summary>
+    /// Method used to share the money number with other objects
+    /// </summary>
+    /// <returns></returns>
     public int GetMoney()
     {
         return money;
     }
 
-    public Waypoints GetWaypoints()
-    {
-        return waypoints;
-    }
-
+    /// <summary>
+    /// Method used to update the money variable
+    /// </summary>
+    /// <param name="money"></param>
     public void SetMoney(int money)
     {
         this.money += money;
     }
 
+    /// <summary>
+    /// Method used to share the lives number with other objects
+    /// </summary>
+    /// <returns></returns>
     public int GetLives()
     {
         return lives;
     }
 
+    /// <summary>
+    /// Method used to update the lives variable
+    /// </summary>
+    /// <param name="lives"></param>
     public void SetLives(int lives)
     {
         this.lives -= lives;
     }
 
+    /// <summary>
+    /// Method used to share the wave start with other objects
+    /// </summary>
+    /// <returns></returns>
+    public bool GetWaveStart()
+    {
+        return _waveStart;
+    }
+
+    /// <summary>
+    /// Method used to update the wave start
+    /// </summary>
+    /// <param name="value"></param>
+    public void SetWaveStart(bool value)
+    {
+        _waveStart = value;
+    }
+    
+    /// <summary>
+    /// Method used to share the wave in progress with other objects
+    /// </summary>
+    /// <returns></returns>
+    public bool GetWaveInProgress()
+    {
+        return _waveInProgress;
+    }
+
+    /// <summary>
+    /// Method used to update the wave in progress
+    /// </summary>
+    /// <param name="value"></param>
+    public void SetWaveInProgress(bool value)
+    {
+        _waveInProgress = value;
+    }
+
+    /// <summary>
+    /// Method used to share the time with other objects
+    /// </summary>
+    /// <returns></returns>
     public float GetTime()
     {
         return timer;
     }
 
-    public void ResetTime()
-    {
-        timer = 90.0f;
-    }
-
-    public bool Upgrade()
-    {
-        return upgrade;
-    }
-
-    public int GetNumberOfEnemies()
-    {
-        return enemiesOnBoard;
-    }
-
+    /// <summary>
+    /// Method used to change the number of enemies in the game
+    /// </summary>
+    /// <param name="number"></param>
     public void SetNumberOfEnemies(int number)
     {
-        enemiesOnBoard += number;
+        _enemiesOnBoard = number;
     }
 
-    public int GetSingleTowerPrice( )
+    /// <summary>
+    /// Method used to change the number of enemies in the game
+    /// </summary>
+    public void RemoveEnemy()
     {
-        return singleTowerPrice;
-    }
-
-    public void SetSingleTowePrice(int towerPrice)
-    {
-        this.singleTowerPrice = towerPrice;
+        _enemiesOnBoard--;
     }
 }

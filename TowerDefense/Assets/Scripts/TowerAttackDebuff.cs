@@ -1,8 +1,10 @@
-
-    public class TowerAttackDebuff : WeaponManager
+/// <summary>
+/// Class defining debuff tower
+/// </summary>
+public class TowerAttackDebuff : WeaponManager
+{
+    public TowerAttackDebuff()
     {
-        public TowerAttackDebuff()
-        {
-            _towersDamage = new TowerDebuffDamage();
-        }
+        TowersDamage = new TowerDebuffDamage();
     }
+}

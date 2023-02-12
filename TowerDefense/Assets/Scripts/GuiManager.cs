@@ -1,42 +1,31 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
 
+/// <summary>
+/// Class responsible for changes in the UI
+/// </summary>
 public class GuiManager : MonoBehaviour
 {
-    public TMP_Text waveNumber;
-    public TMP_Text moneyNumber;
-    public TMP_Text livesNumber;
-    public TMP_Text timeNumber;
-    public GameObject inventory;
-
-    public LevelManager levelManager;
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
+    [SerializeField] private TMP_Text waveNumber;
+    [SerializeField] private TMP_Text moneyNumber;
+    [SerializeField] private TMP_Text livesNumber;
+    [SerializeField] private TMP_Text timeNumber;
+    
+    [SerializeField] private GameObject inventory;
+    [SerializeField] private LevelManager levelManager;
 
     // Update is called once per frame
     void Update()
     {
-        waveNumber.text = "Wave: " + levelManager.GetWave();
+        waveNumber.text = "Wave: " + (levelManager.GetWave() + 1);
         moneyNumber.text = "Money: " + levelManager.GetMoney();
         livesNumber.text = "Lives left: " + levelManager.GetLives();
 
         float minutes = Mathf.FloorToInt(levelManager.GetTime() / 60);
         float seconds = Mathf.FloorToInt(levelManager.GetTime() % 60);
 
-        timeNumber.text = string.Format("{0:00}:{1:00}", minutes,seconds);
+        timeNumber.text = $"{minutes:00}:{seconds:00}";
 
-        if (levelManager.waveInProgress)
-        {
-            inventory.SetActive(false);
-        }
-        else
-        {
-            inventory.SetActive(true);
-        }
+        inventory.SetActive(!levelManager.GetWaveInProgress());
     }
 }

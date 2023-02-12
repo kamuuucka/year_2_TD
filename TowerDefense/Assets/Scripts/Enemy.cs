@@ -1,91 +1,103 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Enemy class responsible for enemies
+/// </summary>
 public class Enemy : MonoBehaviour
 {
-    [SerializeField]
-    protected float maxHealth = 0;
-    [SerializeField]
-    protected float speed = 0;
-    [SerializeField]
-    private float health = 0;
-    [SerializeField]
-    protected int money = 0;
-
-   
+    [SerializeField] private HealthBar healthBar;
     
-    private Transform[] waypoints;
-    private int waypoint = 0;
+    [SerializeField] private float maxHealth;
+    [SerializeField] private float speed;
+    [SerializeField] private float health;
+    [SerializeField] private int money;
 
-    public HealthBar healthBar;
-    private float attackPower;
-    private float oldSpeed;
-    private bool last;
-    private bool slowedDown;
-
-    private bool dead = false;
+    private Transform[] _waypoints;
+    private int _waypoint;
+    private float _attackPower;
+    private float _oldSpeed;
+    private bool _last;
+    private bool _slowedDown;
 
     void Start()
     {
-        oldSpeed = speed;
+        _oldSpeed = speed;
         health = maxHealth;
-        waypoints = LevelManager.Instance.GetWaypoints().waypoints;
+        _waypoints = LevelManager.Instance.GetWaypoints().waypoints;
         healthBar.SetHealth(health, maxHealth);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (waypoint == waypoints.Length)
+        if (_waypoint == _waypoints.Length)
         {
             LevelManager.Instance.SetLives(1);
-            LevelManager.Instance.SetNumberOfEnemies(-1);
-            waypoint = 0;
+            LevelManager.Instance.RemoveEnemy();
+            _waypoint = 0;
             Destroy(gameObject);
         }
-        transform.position = Vector2.MoveTowards(transform.position, waypoints[waypoint].position, speed * Time.deltaTime);
-        if (Vector2.Distance(transform.position, waypoints[waypoint].position) < 0.01f)
+        
+        transform.position = Vector2.MoveTowards(
+            transform.position,
+            _waypoints[_waypoint].position,
+            speed * Time.deltaTime
+            );
+        
+        if (Vector2.Distance(transform.position, _waypoints[_waypoint].position) < 0.01f)
         {
-            waypoint++;
+            _waypoint++;
         }
         
         if (health <= 0)
         {
-            dead = true;
             LevelManager.Instance.SetMoney(money);
-            LevelManager.Instance.SetNumberOfEnemies(-1);
+            LevelManager.Instance.RemoveEnemy();
             Destroy(gameObject);
         }
 
-        if (slowedDown)
+        if (_slowedDown)
         {
             ResetSpeed();
         }
     }
 
+    /// <summary>
+    /// Method to attack enemies
+    /// </summary>
+    /// <param name="damage"></param>
     public void AttackEnemy(float damage)
     {
         health -= damage;
         healthBar.SetHealth(health, maxHealth);
     }
 
+    /// <summary>
+    /// Method to take enemies' speed, used to slow them down in TowerDebuffDamage
+    /// </summary>
+    /// <returns>float _oldSpeed</returns>
     public float GetSpeed()
     {
-        return oldSpeed;
+        return _oldSpeed;
     }
 
+    /// <summary>
+    /// Method to change enemies' speed, used to slow them down in TowerDebuffDamage
+    /// </summary>
+    /// <param name="newSpeed"></param>
     public void SetSpeed(float newSpeed)
     {
         
         speed = newSpeed;
-        slowedDown = true;
+        _slowedDown = true;
     }
 
+    /// <summary>
+    /// Method used to reset enemies' speed
+    /// </summary>
     public void ResetSpeed()
     {
-        speed = oldSpeed;
-        slowedDown = false;
+        speed = _oldSpeed;
+        _slowedDown = false;
     }
 }

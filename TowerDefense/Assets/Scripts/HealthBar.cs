@@ -5,33 +5,33 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Class responsible for health bar of enemies
+/// </summary>
 public class HealthBar : MonoBehaviour
 {
-    public Slider slider;
-    //[ColorUsage(false)]
-    public Color lowHealth;
-    //[ColorUsage(false)]
-    public Color highHealth;
-    public Vector3 offset;
-    public TMP_Text moneyNumber;
+    [SerializeField] private Slider slider;
+    [SerializeField] private Color lowHealth;
+    [SerializeField] private Color highHealth;
+    [SerializeField] private TMP_Text moneyNumber;
 
-    public float health;
-    public float maxHealth;
+    private float _health;
+    private float _maxHealth;
 
     private void Update()
     {
-        slider.transform.position = Camera.main.WorldToScreenPoint(transform.parent.position + offset ); 
-        moneyNumber.transform.position = Camera.main.WorldToScreenPoint(transform.parent.position);
+        Vector3 position = transform.parent.position;
+        slider.transform.position = Camera.main.WorldToScreenPoint(position); 
+        moneyNumber.transform.position = Camera.main.WorldToScreenPoint(position);
     }
 
-    private void OnValidate()
-    {
-        SetHealth(health,maxHealth);
-    }
-
+    /// <summary>
+    /// Method responsible of changing enemies' health bars
+    /// </summary>
+    /// <param name="health"></param>
+    /// <param name="maxHealth"></param>
     public void SetHealth(float health, float maxHealth)
     {
-        Debug.Log(health + " : " + maxHealth);
         slider.gameObject.SetActive(health < maxHealth);
         slider.value = health;
         slider.maxValue = maxHealth;

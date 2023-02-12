@@ -3,32 +3,37 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Class responsible for setting the towers' weapon
+/// </summary>
 public class WeaponManager : MonoBehaviour
 {
-    private TowerAttack towerRange;
-    public ITowersDamage _towersDamage;
-    private float timer;
+    [SerializeField] private int damage;
+    protected ITowersDamage TowersDamage;
+    private TowerRange _towerRange;
+    private float _timer;
 
-    private int singleTowerPrice = 0;
-    private int areaTowerPrice = 0;
-    private int debuffTowerPrice = 0;
-
-    public void SetTowerRange(TowerAttack towerAttack)
+    public void SetTowerRange(TowerRange towerAttack)
     {
-        towerRange = towerAttack;
+        _towerRange = towerAttack;
+    }
+
+    public void UpgradeTower(int addition)
+    {
+        TowersDamage?.Upgrade(addition);
     }
 
     private void Update()
     {
-        if (timer > 0.5f)
+        if (_timer > 0.5f)
         {
-            if (towerRange != null)
+            if (_towerRange != null)
             {
-                _towersDamage?.Use(towerRange);
+                TowersDamage?.Use(_towerRange, damage);
             }
-            timer = 0;
+            _timer = 0;
         }
 
-        timer += Time.deltaTime;
+        _timer += Time.deltaTime;
     }
 }

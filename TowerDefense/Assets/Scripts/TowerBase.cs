@@ -1,47 +1,50 @@
 using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 
+/// <summary>
+/// Class responsible for base of a tower
+/// </summary>
 public class TowerBase : MonoBehaviour
 {
     
     //[SerializeField] private int upgradePrice;
     [SerializeField] private GameObject upgrade;
-    [SerializeField] private TowerAttack towerRange;
-    [SerializeField] private WeaponManager _weaponManager;
+    [SerializeField] private TowerRange towerRange;
+    [SerializeField] private WeaponManager weaponManager;
     [SerializeField] private int upgradeJump;
     [SerializeField] private int price;
     [SerializeField] private int upgradePrice;
 
-    private bool upgradeAvailable = false;
-    private bool upgraded = false;
-    private float timer;
+    private bool _upgradeAvailable;
+    private bool _upgraded;
+    private float _timer;
 
     private void Start()
     {
-        _weaponManager.SetTowerRange(towerRange);
+        weaponManager.SetTowerRange(towerRange);
     }
 
     private void Update()
     {
-        //Debug.Log("Your money: "+LevelManager.Instance.GetMoney());
-        //Debug.Log("Tower upgrade price: " +_weaponManager.GetUpgradePrice());
-         if (LevelManager.Instance.GetMoney() >= upgradePrice)//_weaponManager.GetUpgradePrice())
+         if (LevelManager.Instance.GetMoney() >= upgradePrice)
          {
-             //Debug.Log("upgrade available");
-             upgradeAvailable = true;
+             _upgradeAvailable = true;
              upgrade.SetActive(true);
          }
          else
          {
-             upgradeAvailable = false;
+             _upgradeAvailable = false;
+             upgrade.SetActive(false);
          }
          
-         if (upgraded)
+         if (_upgraded)
          {
-             LevelManager.Instance.SetMoney((-upgradePrice));
-             upgraded = false;
+             LevelManager.Instance.SetMoney(-upgradePrice);
+             _upgraded = false;
              upgrade.SetActive(false);
              upgradePrice += upgradeJump;
+             weaponManager.UpgradeTower(10);
          }
     }
     public int GetPrice()
@@ -50,16 +53,11 @@ public class TowerBase : MonoBehaviour
     }
     public bool GetTowerUpgrade()
     {
-        return upgradeAvailable;
+        return _upgradeAvailable;
     }
 
     public void Upgrade()
     {
-        upgraded = true;
-    }
-    
-    public void UpgradeTower()
-    {
-        
+        _upgraded = true;
     }
 }

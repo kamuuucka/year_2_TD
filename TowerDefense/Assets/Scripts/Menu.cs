@@ -1,8 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+/// <summary>
+/// Class responsible for buttons in the game over scene
+/// </summary>
 public class Menu : MonoBehaviour
 {
     public void StartGame()

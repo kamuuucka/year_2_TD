@@ -434,6 +434,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4257041739862412103}
     m_Modifications:
+    - target: {fileID: 1949354034846898714, guid: a9d59e8c8e3a24c9da9c38bcb5360725, type: 3}
+      propertyPath: damage
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 3320760720567133191, guid: a9d59e8c8e3a24c9da9c38bcb5360725, type: 3}
       propertyPath: m_Name
       value: TowerWeaponArea

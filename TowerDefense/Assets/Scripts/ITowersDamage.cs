@@ -1,8 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
+/// <summary>
+/// Interface responsible for Towers damage and upgrading
+/// </summary>
 public interface ITowersDamage
 {
-    void Use(TowerAttack towerRange);
+    void Use(TowerRange towerRange, int damage);
+
+    void Upgrade(int addition);
 }

@@ -1,17 +1,26 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Interface responsible for debuff tower
+/// </summary>
+public class TowerDebuffDamage : ITowersDamage
+{
+    private int slowDown;
+    private List<Enemy> _enemies;
 
-    public class TowerDebuffDamage : ITowersDamage
+    public void Use(TowerRange range, int damage)
     {
-        [SerializeField]private List<Enemy> _enemies;
-        public void Use(TowerAttack range)
+        slowDown = damage;
+        _enemies = range.GetEnemies();
+        foreach (Enemy enemy in _enemies)
         {
-            _enemies = range.GetEnemies();
-            foreach (Enemy enemy in _enemies)
-            {
-                
-                enemy.SetSpeed(enemy.GetSpeed() - 1.0f);
-            }
+            enemy.SetSpeed(enemy.GetSpeed() - slowDown);
         }
     }
+
+    public void Upgrade(int addition)
+    {
+        slowDown += addition / 10;
+    }
+}

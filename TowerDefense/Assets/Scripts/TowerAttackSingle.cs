@@ -1,11 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
+/// <summary>
+/// Class defining single attack tower
+/// </summary>
 public class TowerAttackSingle : WeaponManager
 {
     public TowerAttackSingle()
     {
-        _towersDamage = new TowerSingleDamage();
+        TowersDamage = new TowerSingleDamage();
     }
 }
