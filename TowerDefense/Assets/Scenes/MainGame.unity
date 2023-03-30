@@ -3111,13 +3111,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5298e6da70bf24e72a4f648dcd5d713c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedObject: {fileID: 0}
   towerSingle: {fileID: 4257041739862412098, guid: 8d136c02e61b04e9f915f6447e59e023, type: 3}
   towerArea: {fileID: 4257041739862412098, guid: ec20d8d41a8ff45a2b1c3a5ae6184b1b, type: 3}
   towerDebuff: {fileID: 4257041739862412098, guid: b2576ba85277e434dad093a4efdc9be9, type: 3}
   grid: {fileID: 1659290445}
-  hover: {fileID: 0}
-  range: {fileID: 0}
   raycastLayer:
     serializedVersion: 2
     m_Bits: 8
@@ -4079,10 +4076,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   money: 150
   lives: 5
-  timer: 30
-  waveStart: 0
-  waveInProgress: 0
-  buyPhase: 1
+  timer: 15
 --- !u!4 &2126015195
 Transform:
   m_ObjectHideFlags: 0

@@ -95,34 +95,43 @@ public class MoveableObject : MonoBehaviour
     //Used in buttons
     public void SpawnTowerSingle()
     {
-        LevelManager.Instance.SetMoney(-_singleTowerPrice);
-        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        GameObject newTower = Instantiate(towerSingle, mousePosition, Quaternion.identity);
-        _selectedObject = newTower;
-        _selectedObject.layer = _layerIgnoreRaycast;
-        _hover = _selectedObject.transform.GetChild(0).gameObject;
-        _hover.SetActive(true);
+        if (LevelManager.Instance.GetMoney() > _singleTowerPrice)
+        {
+            LevelManager.Instance.SetMoney(-_singleTowerPrice);
+            Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            GameObject newTower = Instantiate(towerSingle, mousePosition, Quaternion.identity);
+            _selectedObject = newTower;
+            _selectedObject.layer = _layerIgnoreRaycast;
+            _hover = _selectedObject.transform.GetChild(0).gameObject;
+            _hover.SetActive(true);
+        }
     }
 
     public void SpawnTowerArea()
     {
-        LevelManager.Instance.SetMoney(-_areaTowerPrice);
-        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        GameObject newTower = Instantiate(towerArea, mousePosition, Quaternion.identity);
-        _selectedObject = newTower;
-        _selectedObject.layer = _layerIgnoreRaycast;
-        _hover = _selectedObject.transform.GetChild(0).gameObject;
-        _hover.SetActive(true);
+        if (LevelManager.Instance.GetMoney() > _areaTowerPrice)
+        {
+            LevelManager.Instance.SetMoney(-_areaTowerPrice);
+            Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            GameObject newTower = Instantiate(towerArea, mousePosition, Quaternion.identity);
+            _selectedObject = newTower;
+            _selectedObject.layer = _layerIgnoreRaycast;
+            _hover = _selectedObject.transform.GetChild(0).gameObject;
+            _hover.SetActive(true);
+        }
     }
 
     public void SpawnTowerDebuff()
     {
-        LevelManager.Instance.SetMoney(-_debuffTowerPrice);
-        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        GameObject newTower = Instantiate(towerDebuff, mousePosition, Quaternion.identity);
-        _selectedObject = newTower;
-        _selectedObject.layer = _layerIgnoreRaycast;
-        _hover = _selectedObject.transform.GetChild(0).gameObject;
-        _hover.SetActive(true);
+        if (LevelManager.Instance.GetMoney() > _debuffTowerPrice)
+        {
+            LevelManager.Instance.SetMoney(-_debuffTowerPrice);
+            Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            GameObject newTower = Instantiate(towerDebuff, mousePosition, Quaternion.identity);
+            _selectedObject = newTower;
+            _selectedObject.layer = _layerIgnoreRaycast;
+            _hover = _selectedObject.transform.GetChild(0).gameObject;
+            _hover.SetActive(true);
+        }
     }
 }

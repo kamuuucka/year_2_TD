@@ -130,7 +130,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   upgrade: {fileID: 5213799441015960212}
   towerRange: {fileID: 6905752492615042726}
-  _weaponManager: {fileID: 1611496346579446050}
+  weaponManager: {fileID: 1611496346579446050}
   upgradeJump: 50
   price: 80
   upgradePrice: 50
@@ -426,7 +426,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3602df3fb2e5e4db9bd9e045ae480f4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemies: []
+  enemies: []
 --- !u!1001 &959354996069184312
 PrefabInstance:
   m_ObjectHideFlags: 0
